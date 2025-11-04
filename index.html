@@ -1,11 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi Primera Web</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio Personal - [Tu Nombre]</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>¡Hola, Mundo!</h1>
-    <p>Bienvenido a mi sitio web alojado en GitHub Pages.</p>
+
+    <header class="hero">
+        <nav class="navbar">
+            <div class="container">
+                <a href="#hero" class="logo">[Tu Nombre]</a>
+                <ul class="nav-links">
+                    <li><a href="#about">Sobre Mí</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#skills">Habilidades</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="hero-content container">
+            <div class="hero-text">
+                <h1>Hola, soy [Tu Nombre]</h1>
+                <p>Desarrollador Web | Diseñador Creativo | [Tu Pasión]</p>
+                <a href="#contact" class="btn primary-btn">¡Hablemos!</a>
+                <a href="#projects" class="btn secondary-btn">Ver Proyectos</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/400x400?text=Tu+Foto" alt="Foto de perfil de [Tu Nombre]">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="about-section container section-spacing">
+            <h2>Sobre Mí</h2>
+            <p>Soy un apasionado [Tu Profesión/Interés principal] con experiencia en [Áreas]. Me encanta crear soluciones innovadoras y aprender nuevas tecnologías. Mi objetivo es [Tu Objetivo profesional o personal].</p>
+            <p>Fuera del trabajo, disfruto de [Afición 1], [Afición 2] y [Afición 3].</p>
+        </section>
+
+        <section id="projects" class="projects-section section-spacing">
+            <div class="container">
+                <h2>Mis Proyectos</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250?text=Proyecto+1" alt="Imagen del Proyecto 1">
+                        <h3>Nombre del Proyecto 1</h3>
+                        <p>Breve descripción del proyecto, tecnologías usadas y su propósito. Fue un desafío interesante.</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn small-btn">Ver Demo</a>
+                            <a href="#" target="_blank" class="btn small-btn github-btn"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250?text=Proyecto+2" alt="Imagen del Proyecto 2">
+                        <h3>Nombre del Proyecto 2</h3>
+                        <p>Descripción detallada de este proyecto, destacando sus características y lo que aprendí al hacerlo.</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn small-btn">Ver Demo</a>
+                            <a href="#" target="_blank" class="btn small-btn github-btn"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x250?text=Proyecto+3" alt="Imagen del Proyecto 3">
+                        <h3>Nombre del Proyecto 3</h3>
+                        <p>Este proyecto se centró en [tema]. Me permitió experimentar con [tecnología específica].</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn small-btn">Ver Demo</a>
+                            <a href="#" target="_blank" class="btn small-btn github-btn"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills-section container section-spacing">
+            <h2>Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="fab fa-js-square"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-react"></i>
+                    <span>React (Ejemplo)</span>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <span>SQL (Ejemplo)</span>
+                </div>
+                </div>
+        </section>
+
+        <section id="contact" class="contact-section section-spacing">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>¿Tienes una idea o quieres colaborar? ¡No dudes en contactarme!</p>
+                <div class="contact-links">
+                    <a href="mailto:tu-email@example.com" class="contact-item"><i class="fas fa-envelope"></i> tu-email@example.com</a>
+                    <a href="https://linkedin.com/in/tu-perfil" target="_blank" class="contact-item"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/tu-usuario" target="_blank" class="contact-item"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 [Tu Nombre]. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
