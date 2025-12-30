@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightNavMenu);
     highlightNavMenu(); // Llamar al cargar para resaltar la sección inicial
