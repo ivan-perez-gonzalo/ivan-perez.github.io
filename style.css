@@ -485,4 +485,50 @@ footer {
     .hero-text p {
         font-size: 1em;
     }
+    /* Estilos para los Contadores de Propósitos */
+.counter-card {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    user-select: none; /* Evita que se seleccione el texto al hacer muchos clics */
+}
+
+.counter-card:hover {
+    transform: scale(1.05);
+    background-color: #f0f7ff;
+}
+
+.counter-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--background-dark);
+}
+
+.counter-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+    margin: 10px 0;
+}
+
+/* Barra de progreso */
+.progress-bar-bg {
+    background-color: #eee;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    background-color: var(--accent-color);
+    height: 100%;
+    width: 0%; /* Se controla con JS */
+    transition: width 0.3s ease;
+}
 }
