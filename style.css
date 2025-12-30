@@ -575,26 +575,36 @@ footer {
     filter: drop-shadow(0 0 3px rgba(0, 123, 255, 0.5));
 }
 
-/* Contenido dentro del círculo: Emoji + Valor */
+/* Contenido centrado dentro del círculo */
 .inner-content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center; /* Centrado vertical */
+    align-items: center;     /* Centrado horizontal */
+    pointer-events: none;    /* Para que el clic pase a la tarjeta */
 }
 
 .inner-emoji {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Tamaño del emoji */
+    line-height: 1;
     margin-bottom: 2px;
 }
 
 .inner-value {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #333;
+    font-size: 0.85rem; /* Tamaño de los números (1/200) */
+    font-weight: 700;
+    color: #444;       /* Gris oscuro para legibilidad */
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Opcional: un efecto de "completado" */
+.counter-card.completed .inner-value {
+    color: #28a745; /* Cambia a verde al terminar */
 }
 
 /* Título fuera del círculo */
