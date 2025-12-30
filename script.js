@@ -1,18 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // === 1. LÓGICA DE NAVEGACIÓN Y SCROLL ===
+    
     // Smooth scrolling para la navegación
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            // Opcional: Cerrar menú si fuera móvil (no implementado en este CSS básico)
-            // const navLinks = document.querySelector('.nav-links');
-            // if (navLinks.classList.contains('active')) {
-            //     navLinks.classList.remove('active');
-            // }
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
@@ -22,10 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function highlightNavMenu() {
         let current = '';
-
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 80; // Ajusta 80px para el header fijo
-            if (scrollY >= sectionTop) {
+            if (window.scrollY >= sectionTop) {
                 current = section.getAttribute('id');
             }
         });
@@ -37,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightNavMenu);
     highlightNavMenu(); // Llamar al cargar para resaltar la sección inicial
 
-    // 1. Definición de los 10 propósitos
+
+    // === 2. LÓGICA DE LOS CONTADORES (PROPÓSITOS 2026) ===
+
+    // Definición de los 10 propósitos
     const goals = [
         { id: 'gym', title: '💪 Ir al Gimnasio', target: 200 },
         { id: 'run', title: '🏃 Salir a Correr', target: 50 },
@@ -58,18 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const container = document.getElementById('counters-container');
 
-    // 2. Función para cargar datos de localStorage o iniciar en 0
+    // Función para cargar datos de localStorage o iniciar en 0
     function getProgress(id) {
         return parseInt(localStorage.getItem('goal_' + id)) || 0;
     }
 
-    // 3. Función para guardar datos
+    // Función para guardar datos
     function saveProgress(id, value) {
         localStorage.setItem('goal_' + id, value);
     }
 
-    // 4. Función para crear las tarjetas en el HTML
+    // Función para crear las tarjetas en el HTML
     function renderCounters() {
+        if (!container) return; // Si no existe el contenedor, no hace nada
+        
         container.innerHTML = ''; // Limpiar
         goals.forEach(goal => {
             const current = getProgress(goal.id);
@@ -99,21 +100,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Función para actualizar la interfaz sin recargar todo
+    // Función para actualizar la interfaz sin recargar todo
     function updateUI(id, current, target) {
-        document.getElementById(`val-${id}`).innerText = `${current} / ${target}`;
-        const percentage = Math.min((current / target) * 100, 100);
-        document.getElementById(`bar-${id}`).style.width = `${percentage}%`;
+        const textElement = document.getElementById(`val-${id}`);
+        const barElement = document.getElementById(`bar-${id}`);
+        
+        if (textElement) textElement.innerText = `${current} / ${target}`;
+        if (barElement) {
+            const percentage = Math.min((current / target) * 100, 100);
+            barElement.style.width = `${percentage}%`;
+        }
     }
 
     // Botón de Reinicio
-    document.getElementById('reset-btn').addEventListener('click', () => {
-        if (confirm('¿Seguro que quieres reiniciar todos tus propósitos a cero?')) {
-            goals.forEach(goal => localStorage.removeItem('goal_' + goal.id));
-            renderCounters();
-        }
-    });
+    const resetBtn = document.getElementById('reset-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (confirm('¿Seguro que quieres reiniciar todos tus propósitos a cero?')) {
+                goals.forEach(goal => localStorage.removeItem('goal_' + goal.id));
+                renderCounters();
+            }
+        });
+    }
 
+    // Arrancar los contadores
     renderCounters();
 
 });
