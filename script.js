@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightNavMenu(); // Llamar al cargar para resaltar la sección inicial
 
 
-    // === 2. LÓGICA DE LOS CONTADORES CIRCULARES (PROPÓSITOS 2026) ===
+// === 2. LÓGICA DE LOS CONTADORES CIRCULARES (PROPÓSITOS 2026) ===
 
     // Definición de los 10 propósitos
     const goals = [
