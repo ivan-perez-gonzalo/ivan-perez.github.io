@@ -558,21 +558,18 @@ footer {
     height: 120px;
 }
 
-/* El fondo del círculo (ahora gris claro fijo) */
 .progress-ring-circle-bg {
-    stroke: #f3f3f3;
-    stroke-width: 8;
-    fill: none;
+    stroke: #eeeeee !important; /* Gris muy claro */
+    stroke-width: 10;
+    fill: none !important;      /* IMPORTANTE: Evita el círculo negro */
 }
 
-/* La barra de progreso (ahora azul brillante fijo) */
 .progress-ring-circle {
-    stroke: #007bff; /* Color Azul */
-    stroke-width: 8;
-    fill: none;
+    stroke: #007bff !important; /* Azul eléctrico */
+    stroke-width: 10;
+    fill: none !important;      /* IMPORTANTE: Evita el círculo negro */
     stroke-linecap: round;
-    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 0 3px rgba(0, 123, 255, 0.5));
+    transition: stroke-dashoffset 0.4s ease;
 }
 
 /* Contenido centrado dentro del círculo */
