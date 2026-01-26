@@ -4,9 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iván Pérez Gonzalo | Portafolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --primary: #007bff;
+            --accent: #00d4ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-hover: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --bg-dark: #0a0a0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Fondo Animado (Igual que en Sobre Mí) */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0b, #121225, #1a1a3a, #0f2045);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Contenedor Principal Centrado */
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- TARJETA DE CRISTAL (PORTADA) --- */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 850px; /* Ancho máximo para PC */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            
+            /* Grid para PC */
+            display: grid;
+            gap: 40px;
+        }
+
+        /* Perfil (Izquierda en PC, Arriba en Móvil) */
+        .profile-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container {
+            position: relative;
+            width: 140px; height: 140px;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Punto verde */
+        .status-badge {
+            position: absolute;
+            bottom: 8px; right: 8px;
+            width: 20px; height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tags span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+        }
+
+        /* --- LINK TREE (DERECHA) --- */
+        .link-tree {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .link-item:hover {
+            background: var(--glass-hover);
+            transform: translateX(5px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .icon-box {
+            width: 30px;
+            font-size: 1.2rem;
+            color: var(--accent);
+            display: flex; justify-content: center;
+        }
+
+        .link-item span {
+            flex: 1;
+            padding-left: 15px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .arrow {
+            font-size: 0.8rem;
+            opacity: 0.4;
+            transition: 0.3s;
+        }
+        .link-item:hover .arrow { opacity: 1; transform: translateX(5px); }
+
+        /* Footer Iconos */
+        .social-footer {
+            margin-top: 10px;
+            display: flex; justify-content: center; gap: 20px;
+        }
+        .social-footer a {
+            color: rgba(255,255,255,0.5);
+            font-size: 1.4rem; transition: 0.3s;
+        }
+        .social-footer a:hover { color: var(--accent); transform: translateY(-3px); }
+
+        /* --- RESPONSIVE --- */
+        /* En PC: Ponemos el perfil a la izquierda y los links a la derecha */
+        @media (min-width: 800px) {
+            .glass-card {
+                grid-template-columns: 1fr 1.3fr; /* Divide en 2 columnas */
+                text-align: left;
+                padding: 60px;
+            }
+
+            .profile-section {
+                align-items: flex-start; /* Alinea texto a la izquierda */
+                text-align: left;
+                border-right: 1px solid var(--glass-border);
+                padding-right: 40px;
+            }
+
+            .subtitle { margin-left: 0; margin-right: auto; }
+            .tags { justify-content: flex-start; }
+            .social-footer { justify-content: flex-start; margin-top: 30px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,20 +227,27 @@
 
     <main class="main-wrapper">
         <div class="glass-card">
+            
             <div class="profile-section">
                 <div class="image-container">
-                    <img src="perfil.jpg" alt="Iván Pérez Gonzalo">
+                    <img src="fotoweb2.png" alt="Iván Pérez Gonzalo">
                     <div class="status-badge"></div>
                 </div>
-                <div class="text-content">
-                    <h1>Iván Pérez Gonzalo</h1>
-                    <p class="subtitle">Estudiante de Ingeniería Aeroespacial y Telecomunicaciones</p>
-                    <div class="tags">
-                        <span>Aeroespacial</span>
-                        <span>Telecomunicaciones</span>
-                        <span>Tech Enthusiast</span>
-                    </div>
+                
+                <h1>Iván Pérez Gonzalo</h1>
+                <p class="subtitle">Estudiante de Ingeniería en Sistemas Aeroespaciales y de Telecomunicaciones</p>
+                
+                <div class="tags">
+                    <span>Aeroespacial</span>
+                    <span>Telecomunicaciones</span>
+                    <span>Tech Enthusiast</span>
                 </div>
+
+                <footer class="social-footer">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </footer>
             </div>
 
             <nav class="link-tree">
@@ -36,16 +256,19 @@
                     <span>Sobre Mí</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </a>
+                
                 <a href="proyectos.html" class="link-item">
                     <div class="icon-box"><i class="fas fa-rocket"></i></div>
                     <span>Proyectos</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </a>
+                
                 <a href="propositos.html" class="link-item">
                     <div class="icon-box"><i class="fas fa-chart-line"></i></div>
                     <span>Propósitos 2026</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </a>
+                
                 <a href="contacto.html" class="link-item">
                     <div class="icon-box"><i class="fas fa-paper-plane"></i></div>
                     <span>Contacto</span>
@@ -53,11 +276,6 @@
                 </a>
             </nav>
 
-            <footer class="social-footer">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </footer>
         </div>
     </main>
 
