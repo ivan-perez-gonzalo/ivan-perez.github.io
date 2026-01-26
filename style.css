@@ -192,4 +192,190 @@ h1 {
     .tags { justify-content: flex-start; }
     .image-container { margin: 0 0 20px 0; }
     .social-footer { justify-content: flex-start; }
+    /* --- ESTILOS GENERALES PARA PAGINAS INTERNAS --- */
+.bg-dots {
+    background-color: #f8f9fa;
+    background-image: radial-gradient(#dee2e6 1px, transparent 1px);
+    background-size: 20px 20px; /* Patrón de puntos sutil */
+    color: var(--primary);
+}
+
+.top-nav {
+    padding: 20px 40px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.back-link:hover { color: var(--accent); }
+
+/* --- CONTENEDOR Y HEADER --- */
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 20px 80px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-header .tag {
+    background: #e3f2fd;
+    color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.about-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-top: 15px;
+}
+
+.highlight {
+    color: var(--accent);
+    font-family: 'Satisfy', cursive;
+    position: relative;
+}
+
+/* --- BENTO GRID SYSTEM (La Magia) --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Columnas en PC */
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+/* Estilo base de todas las tarjetas */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.card h2, .card h3 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+/* --- Personalización de cada tarjeta --- */
+
+/* 1. Intro: Ocupa 2 espacios de ancho */
+.intro-card {
+    grid-column: span 2;
+}
+.intro-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* 2. Foto: Ocupa 1 espacio pero es alta */
+.photo-card {
+    grid-column: span 1;
+    grid-row: span 2; /* Ocupa 2 filas de alto */
+    padding: 0; /* Sin margen para que la foto llene todo */
+    overflow: hidden;
+}
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.photo-card:hover img { transform: scale(1.05); }
+
+/* 3. Stats */
+.stats-card {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-item .number { font-size: 2rem; font-weight: 800; color: var(--accent); }
+.stat-item .label { font-size: 0.8rem; font-weight: 600; color: #888; text-transform: uppercase; }
+
+/* 4. Educación: Ocupa 2 espacios */
+.education-card {
+    grid-column: span 2;
+}
+.timeline-list { list-style: none; }
+.timeline-list li {
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent);
+}
+.timeline-list strong { display: block; font-size: 1.1rem; }
+.timeline-list span { color: #777; font-size: 0.9rem; }
+
+/* 5. Skills */
+.tags-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+.tags-cloud span {
+    background: #f1f3f5;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* 6. Hobbies */
+.hobby-icons { display: flex; justify-content: space-between; margin-top: 15px; }
+.hobby { text-align: center; color: #555; }
+.hobby i { display: block; font-size: 1.5rem; margin-bottom: 5px; color: var(--accent); }
+
+/* --- Footer CTA --- */
+.about-footer {
+    text-align: center;
+    margin-top: 60px;
+}
+.about-footer p { margin-bottom: 15px; font-weight: 600; color: #888; }
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.btn-primary:hover { background: var(--accent); }
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .bento-grid {
+        display: flex; /* Cambia a columna en móvil */
+        flex-direction: column;
+    }
+    
+    .intro-card, .photo-card, .education-card {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .photo-card { height: 300px; } /* Altura fija para la foto en móvil */
+    .about-header h1 { font-size: 2.2rem; }
+}
 }
