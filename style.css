@@ -1,195 +1,174 @@
 :root {
-    --primary: #007bff;
-    --accent: #00d4ff;
-    --glass: rgba(255, 255, 255, 0.12);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --text: #ffffff;
+    --primary: #2c3e50;    /* Color oscuro elegante */
+    --accent: #e91e63;     /* Rosa/Rojo estilo "brush" (cámbialo a azul si prefieres) */
+    --bg-light: #f8f9fa;   /* Gris muy claro para la sección de abajo */
+    --text-body: #555;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; } /* Para bajar suave al hacer click */
 
 body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text);
-    overflow-x: hidden;
-    background-color: #0a0a0b;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--primary);
+    background-color: white;
 }
 
-/* --- Fondo Animado --- */
-.bg-gradient {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    background: linear-gradient(45deg, #0a0a0b, #1a1a2e, #16213e, #0f3460);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
+/* --- SECCIÓN 1: SPLIT HERO --- */
+.split-hero {
+    display: flex;
+    min-height: 100vh; /* Ocupa toda la pantalla */
+    width: 100%;
+    overflow: hidden;
 }
 
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Lado Izquierdo: La Imagen */
+.hero-image-side {
+    flex: 1; /* Ocupa el 50% */
+    position: relative;
+    background-color: #eee; /* Fondo temporal mientras carga la foto */
 }
 
-/* --- Contenedor Principal --- */
-.main-wrapper {
-    min-height: 100vh;
+.hero-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* CLAVE: Hace que la foto llene el espacio sin deformarse */
+    object-position: center top; /* Centra la foto */
+}
+
+/* Lado Derecho: El Texto */
+.hero-text-side {
+    flex: 1; /* Ocupa el 50% */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px; /* Espacio interior generoso */
+    background: white;
+}
+
+/* Tipografía */
+.handwritten-title {
+    font-family: 'Satisfy', cursive; /* Fuente estilo firma */
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    transform: rotate(-2deg); /* Pequeña inclinación para darle estilo */
+}
+
+.main-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+/* Botón estilo "Pincelada" */
+.cta-brush-btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: white;
+    padding: 15px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* Forma irregular creativa */
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: fit-content;
+}
+
+.cta-brush-btn:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
+}
+
+/* --- SECCIÓN 2: LINKTREE (ABAJO) --- */
+.links-section {
+    padding: 80px 20px;
+    background-color: var(--bg-light);
+    min-height: 60vh; /* Altura mínima para que no se vea cortado */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
 }
 
-/* --- Tarjeta de Cristal --- */
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 30px;
-    padding: 40px;
+.container {
     width: 100%;
-    max-width: 500px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    max-width: 600px;
     text-align: center;
 }
 
-/* --- Perfil --- */
-.image-container {
-    position: relative;
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 20px;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid white;
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
-}
-
-.status-badge {
-    position: absolute;
-    bottom: 8px; right: 8px;
-    width: 18px; height: 18px;
-    background: #00ff88;
-    border-radius: 50%;
-    border: 3px solid #1a1a2e;
-}
-
-h1 {
+.links-section h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
+    color: var(--primary);
 }
 
-.subtitle {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    margin-bottom: 15px;
-}
-
-.tags {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.tags span {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    background: rgba(255,255,255,0.1);
-    padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 1px;
-}
-
-/* --- Enlaces estilo Linktree Pro --- */
-.link-tree {
+.link-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
-.link-item {
+.link-card {
     display: flex;
     align-items: center;
-    padding: 14px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    justify-content: space-between;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
     text-decoration: none;
-    color: white;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--primary);
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-.link-item:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(8px);
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     border-color: var(--accent);
-}
-
-.icon-box {
-    width: 35px;
-    font-size: 1.2rem;
     color: var(--accent);
 }
 
-.link-item span {
-    flex: 1;
-    text-align: left;
-    font-weight: 500;
-}
+.link-card .icon { font-size: 1.2rem; width: 30px; }
+.link-card .arrow { font-size: 0.9rem; opacity: 0.5; }
 
-.arrow {
-    font-size: 0.8rem;
-    opacity: 0.4;
-    transition: 0.3s;
-}
-
-.link-item:hover .arrow {
-    opacity: 1;
-    transform: translateX(4px);
-}
-
-/* --- Footer --- */
-.social-footer {
-    margin-top: 35px;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-}
-
-.social-footer a {
-    color: white;
-    font-size: 1.4rem;
-    opacity: 0.6;
-    transition: 0.3s;
-}
-
-.social-footer a:hover {
-    opacity: 1;
-    color: var(--accent);
-    transform: translateY(-3px);
-}
-
-/* --- Responsividad para PC --- */
-@media (min-width: 800px) {
-    .glass-card {
-        max-width: 850px;
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 50px;
-        text-align: left;
-        align-items: center;
+/* --- RESPONSIVE (MÓVIL) --- */
+@media (max-width: 900px) {
+    .split-hero {
+        flex-direction: column; /* Apilar verticalmente */
     }
 
-    .tags { justify-content: flex-start; }
-    .image-container { margin: 0 0 20px 0; }
-    .social-footer { justify-content: flex-start; }
+    .hero-image-side {
+        height: 50vh; /* La foto ocupa la mitad superior de la pantalla */
+        flex: none;
+    }
+
+    .hero-text-side {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center; /* Centrar todo */
+    }
+
+    .handwritten-title { font-size: 2.5rem; }
+    .main-headline { font-size: 1.5rem; }
+    
+    .cta-brush-btn { width: 100%; text-align: center; }
 }
