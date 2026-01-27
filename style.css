@@ -1,96 +1,298 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí | Iván Pérez</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+/* =========================================
+   1. VARIABLES Y ESTILOS BASE
+   ========================================= */
+:root {
+    --primary: #007bff;
+    --accent: #00d4ff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-hover: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text: #ffffff;
+    --bg-dark: #0a0a0b;
+}
 
-    <div class="bg-gradient"></div>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <a href="index.html" class="back-btn-glass">
-        <i class="fas fa-arrow-left"></i>
-    </a>
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-    <main class="main-wrapper">
-        <div class="glass-dashboard">
-            
-            <aside class="dashboard-sidebar">
-                <div class="profile-highlight">
-                    <div class="image-container-large">
-                        <img src="perfil.jpg" alt="Iván Pérez">
-                        <div class="status-indicator pulsate"></div>
-                    </div>
-                    <h2>Iván Pérez</h2>
-                    <p class="role-tag">Ingeniería Aeroespacial & Teleco</p>
-                    
-                    <div class="quick-stats">
-                        <div class="stat">
-                            <span class="num">21</span>
-                            <span class="label">Edad</span>
-                        </div>
-                        <div class="stat">
-                            <span class="num">ES</span>
-                            <span class="label">Ubicación</span>
-                        </div>
-                    </div>
+/* Fondo Animado */
+.bg-gradient {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #0a0a0b, #121225, #1a1a3a, #0f2045);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
 
-                    <div class="social-row">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="mailto:tu@email.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </aside>
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-            <section class="dashboard-content">
-                
-                <div class="content-block">
-                    <h3><i class="fas fa-user-astronaut"></i> Mi Misión</h3>
-                    <p>
-                        Soy un apasionado de la tecnología con una visión clara: <strong>conectar el cielo con la tierra</strong>. 
-                        Estudio la doble vertiente de los sistemas aeroespaciales y las telecomunicaciones porque creo que el futuro está en la integración de ambos mundos.
-                    </p>
-                    <p>
-                        No me conformo con la teoría; me mueve la curiosidad de desmontar, programar y volver a montar sistemas complejos para entender su alma.
-                    </p>
-                </div>
+/* Títulos */
+h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
 
-                <div class="content-block">
-                    <h3><i class="fas fa-graduation-cap"></i> Trayectoria</h3>
-                    <div class="glass-timeline">
-                        <div class="timeline-item">
-                            <span class="date">Actualidad</span>
-                            <h4>Ingeniería Aeroespacial</h4>
-                            <p>Universidad Politécnica</p>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="date">En curso</span>
-                            <h4>Ingeniería de Telecomunicaciones</h4>
-                            <p>Especialización en Sistemas</p>
-                        </div>
-                    </div>
-                </div>
+/* Botón Volver Flotante */
+.back-btn-glass {
+    position: fixed;
+    top: 30px; left: 30px;
+    width: 50px; height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; text-decoration: none;
+    transition: all 0.3s ease; z-index: 100;
+}
+.back-btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
 
-                <div class="content-block">
-                    <h3><i class="fas fa-code"></i> Arsenal Tecnológico</h3>
-                    <div class="tech-grid">
-                        <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
-                        <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-                        <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
-                        <span class="tech-badge"><i class="fas fa-satellite"></i> SatComs</span>
-                        <span class="tech-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
-                        <span class="tech-badge"><i class="fab fa-react"></i> React</span>
-                    </div>
-                </div>
+/* Contenedor Principal */
+.main-wrapper {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 100px 20px 50px;
+    max-width: 1200px; margin: 0 auto;
+}
 
-            </section>
-        </div>
-    </main>
+/* =========================================
+   2. ESTILOS DE 'SOBRE MÍ' (DASHBOARD)
+   ========================================= */
+.glass-dashboard {
+    display: flex; flex-direction: column;
+    background: var(--glass);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    overflow: hidden;
+    width: 100%; max-width: 950px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
 
-</body>
-</html>
+/* Sidebar Izquierda */
+.dashboard-sidebar {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px 30px; text-align: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.image-container-large {
+    position: relative; width: 150px; height: 150px; margin: 0 auto 25px;
+}
+.image-container-large img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Punto verde pulsante */
+.status-indicator {
+    position: absolute; bottom: 8px; right: 8px;
+    width: 22px; height: 22px;
+    background-color: #00ff88;
+    border-radius: 50%; border: 3px solid var(--bg-dark);
+}
+.pulsate { animation: pulse-green 2s infinite; }
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+    100% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
+}
+
+.role-tag {
+    color: var(--accent); font-size: 0.9rem; font-weight: 700;
+    margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase;
+}
+
+.quick-stats {
+    display: flex; justify-content: center; gap: 30px;
+    margin-bottom: 30px; padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.stat { display: flex; flex-direction: column; }
+.stat .num { font-size: 1.4rem; font-weight: 700; color: white; }
+.stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+
+.social-row { display: flex; justify-content: center; gap: 25px; }
+.social-row a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: 0.3s; }
+.social-row a:hover { color: var(--accent); transform: translateY(-3px); }
+
+/* Contenido Derecho (Sobre Mí) */
+.dashboard-content { padding: 40px; }
+.content-block { margin-bottom: 45px; }
+.content-block:last-child { margin-bottom: 0; }
+
+.content-block h3 {
+    font-size: 1.3rem; color: white; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+}
+.content-block h3 i { color: var(--accent); }
+.content-block p {
+    color: rgba(255, 255, 255, 0.85); line-height: 1.7;
+    margin-bottom: 15px; font-size: 1rem;
+}
+
+/* Timeline */
+.glass-timeline {
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 25px; margin-left: 10px;
+}
+.timeline-item { position: relative; margin-bottom: 30px; }
+.timeline-item::before {
+    content: ''; position: absolute; left: -31px; top: 5px;
+    width: 10px; height: 10px; background: var(--accent);
+    border-radius: 50%; box-shadow: 0 0 10px var(--accent);
+}
+.timeline-item .date {
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;
+}
+
+/* Badges */
+.tech-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.tech-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 18px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 500; color: rgba(255, 255, 255, 0.9);
+    transition: 0.3s; display: flex; align-items: center; gap: 10px;
+}
+.tech-badge i { color: var(--accent); }
+.tech-badge:hover {
+    background: rgba(255, 255, 255, 0.15); border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+/* Responsive Sobre Mi PC */
+@media (min-width: 900px) {
+    .glass-dashboard { flex-direction: row; }
+    .dashboard-sidebar {
+        width: 35%; border-bottom: none; border-right: 1px solid var(--glass-border);
+        display: flex; flex-direction: column; justify-content: center; padding: 50px;
+    }
+    .dashboard-content { width: 65%; padding: 60px; overflow-y: auto; max-height: 80vh; }
+}
+
+/* =========================================
+   3. ESTILOS DE PROYECTOS (GRID Y TARJETAS)
+   ========================================= */
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-header h1 {
+    font-size: 3rem; margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-header p { color: rgba(255, 255, 255, 0.6); max-width: 600px; margin: 0 auto; }
+
+.projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
+}
+
+/* Estilo Base de Tarjeta (Sin 3D aun) */
+.project-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-image {
+    height: 200px; width: 100%; overflow: hidden; position: relative;
+}
+.card-image img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+}
+.project-card:hover .card-image img { transform: scale(1.1); }
+
+.card-content {
+    padding: 25px; flex-grow: 1; display: flex; flex-direction: column;
+}
+
+.card-category {
+    font-size: 0.75rem; text-transform: uppercase; color: var(--accent);
+    font-weight: 700; margin-bottom: 10px; letter-spacing: 1px;
+}
+.card-content h3 { font-size: 1.5rem; margin-bottom: 10px; color: white; }
+.card-content p {
+    font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin-bottom: 20px;
+}
+
+.tech-stack {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; margin-top: auto;
+}
+.tech-tag {
+    background: rgba(255, 255, 255, 0.1); padding: 5px 12px;
+    border-radius: 12px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card-actions {
+    display: flex; gap: 15px; border-top: 1px solid var(--glass-border); padding-top: 20px;
+}
+.btn-project {
+    flex: 1; padding: 10px; border-radius: 10px;
+    text-align: center; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-demo {
+    background: var(--primary); color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+.btn-demo:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-code {
+    background: transparent; border: 1px solid var(--glass-border);
+    color: rgba(255, 255, 255, 0.7);
+}
+.btn-code:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+
+/* =========================================
+   4. EFECTO 3D TILT PREMIUM (NUEVO)
+   ========================================= */
+
+/* Esta clase se añade a las tarjetas que quieras que tengan 3D */
+.tilt-card {
+    position: relative;
+    transform-style: preserve-3d; /* Permite que los hijos vivan en 3D */
+    transform: perspective(1000px); /* La cámara está a 1000px */
+    will-change: transform; /* Optimización de rendimiento */
+}
+
+/* El contenido interno (texto/iconos) flota sobre la tarjeta */
+.tilt-card .card-content {
+    transform: translateZ(40px); /* Se separa 40px del fondo hacia ti */
+    transform-style: preserve-3d;
+}
+
+/* La imagen también flota, pero un poco menos */
+.tilt-card .card-image {
+    transform: translateZ(20px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra propia para dar altura */
+}
+
+/* El Brillo (Glare) */
+.glare {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(
+        circle, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0) 70%
+    );
+    border-radius: 50%;
+    pointer-events: none; /* El ratón lo ignora */
+    opacity: 0;
+    mix-blend-mode: overlay; /* Se fusiona con el fondo como luz */
+    transform: translate(-50%, -50%); /* Centrado en el cursor */
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
