@@ -64,6 +64,63 @@ document.addEventListener('DOMContentLoaded', () => {
     function saveProgress(id, value) {
         localStorage.setItem('goal_' + id, value);
     }
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    const cards = document.querySelectorAll('.tilt-card');
+
+    cards.forEach(card => {
+        const glare = card.querySelector('.glare');
+
+        card.addEventListener('mousemove', (e) => {
+            // 1. Obtener dimensiones de la tarjeta
+            const rect = card.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+
+            // 2. Calcular posición del ratón relativa a la tarjeta
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // 3. Calcular rotación (X gira en eje Y, Y gira en eje X)
+            // Multiplicamos por 15 para que el ángulo máximo sea 15 grados
+            const rotateY = ((mouseX / width) - 0.5) * 15; 
+            const rotateX = ((mouseY / height) - 0.5) * -15;
+
+            // 4. Aplicar la rotación a la tarjeta
+            card.style.transform = `
+                perspective(1000px) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                scale(1.02)
+            `;
+
+            // 5. Mover el Brillo (Glare)
+            if (glare) {
+                glare.style.opacity = '1';
+                // El brillo sigue al ratón
+                glare.style.left = `${mouseX}px`;
+                glare.style.top = `${mouseY}px`;
+            }
+        });
+
+        // Cuando el ratón sale, todo vuelve a su sitio suavemente
+        card.addEventListener('mouseleave', () => {
+            // Quitamos la transformación (vuelve a plano)
+            card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+            
+            // Ocultamos el brillo
+            if (glare) {
+                glare.style.opacity = '0';
+            }
+            
+            // Añadimos una transición temporal para que el retorno sea suave
+            card.style.transition = 'transform 0.5s ease';
+            setTimeout(() => {
+                card.style.transition = ''; // Limpiamos la transición para el próximo movimiento
+            }, 500);
+        });
+    });
+});
 
 // --- FUNCIÓN RENDER CORREGIDA CON CAPA EXTRA ---
     function renderCounters() {
