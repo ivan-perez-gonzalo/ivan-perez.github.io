@@ -279,40 +279,37 @@ h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
     box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra propia para dar altura */
 }
 
-/* --- CORRECCIÓN DEL EFECTO 3D (GLARE) --- */
+/* --- CORRECCIÓN FINAL DEL EFECTO 3D (Z-INDEX Y OPACIDAD) --- */
 
-/* 1. Añadimos Z-Index al contenido para que siempre esté ENCIMA del brillo */
+/* 1. Forzamos a que el contenido esté MUY por encima */
 .project-card .card-content,
-.project-card .card-image,
-.tilt-card .card-content,
-.tilt-card .card-image {
-    position: relative; /* Necesario para que z-index funcione */
-    z-index: 5; /* Capa superior (Texto e Imagen) */
-    /* Mantener las transformaciones 3D que ya tenías */
+.project-card .card-image {
+    position: relative;
+    z-index: 100 !important; /* Capa superior obligatoria */
     transform-style: preserve-3d;
 }
 
-/* 2. Modificamos el Brillo para que sea sutil y esté DEBAJO del texto */
+/* 2. El Brillo (Glare) arreglado: Sutil y en el fondo */
 .glare {
     position: absolute;
-    width: 300px; /* Un poco más grande para que sea más suave */
-    height: 300px;
+    width: 250px;
+    height: 250px;
     
-    /* CAMBIO CLAVE: Opacidad bajada del 0.3 al 0.08 (Muy sutil) */
+    /* CAMBIO CLAVE: Opacidad del 3% (0.03). Antes era mucho más fuerte. */
     background: radial-gradient(
         circle, 
-        rgba(255, 255, 255, 0.08) 0%, 
-        rgba(255, 255, 255, 0) 70%
+        rgba(255, 255, 255, 0.04) 0%, 
+        transparent 60%
     );
     
     border-radius: 50%;
-    pointer-events: none;
+    pointer-events: none; /* Ignora el ratón */
     opacity: 0;
-    mix-blend-mode: overlay; 
+    
+    /* CAMBIO CLAVE: 'soft-light' es más suave que 'overlay' */
+    mix-blend-mode: soft-light; 
+    
     transform: translate(-50%, -50%);
-    
-    z-index: 1; /* Capa inferior (Brillo) */
-    
-    transition: opacity 0.3s ease;
-
+    z-index: 1 !important; /* Capa inferior obligatoria */
+    transition: opacity 0.5s ease;
 }
