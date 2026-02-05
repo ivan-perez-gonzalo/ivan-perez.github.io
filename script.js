@@ -204,19 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         });
     });
-    const videos = document.querySelectorAll('.hover-video');
 
-        videos.forEach(video => {
-            // Al entrar el mouse, reproduce
-            video.parentElement.parentElement.addEventListener('mouseenter', () => {
-                video.play();
-            });
-            
-            // Al salir el mouse, pausa y vuelve al inicio
-            video.parentElement.parentElement.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0; // Opcional: regresa el video al principio
-            });
-        });
 
 });
