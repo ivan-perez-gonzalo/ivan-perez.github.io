@@ -10,159 +10,161 @@
 
     <style>
         /* --- VARIABLES --- */
-        :root {
-            --primary: #007bff;
-            --dark-text: #2c3e50;
-            --light-text: #636e72;
-            --paper-bg: #ffffff;
-            --accent: #00d4ff;
-            --bg-dark: #0a0a0b;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--dark-text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* Fondo Animado */
-        .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(45deg, #0a0a0b, #121225, #1a1a3a, #0f2045);
-            background-size: 400% 400%; animation: gradientMove 15s ease infinite;
-        }
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
-        }
-        
-        /* Botón Volver */
-        .back-btn-glass {
-            position: fixed; top: 30px; left: 30px; width: 50px; height: 50px;
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: white; text-decoration: none; transition: all 0.3s ease; z-index: 100;
-        }
-        .back-btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
-        
-        /* Contenedor Principal */
-        .cv-wrapper {
-            display: flex; justify-content: center; padding: 80px 20px; min-height: 100vh;
-        }
-        
-        /* Papel Flotante */
-        .floating-paper {
-            background: var(--paper-bg); width: 100%; max-width: 950px; /* Un poco más ancho para que quepa todo */
-            border-radius: 8px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden; animation: floatPaper 6s ease-in-out infinite;
-        }
-        @keyframes floatPaper {
-            0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); }
-        }
-        
-        .paper-header-strip { height: 10px; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 100%; }
-        .cv-content { padding: 50px; }
-        
-        /* --- CABECERA CV (SOLUCIÓN DE ALINEACIÓN) --- */
-        .cv-header {
-            display: flex;
-            justify-content: space-between; /* Uno a cada extremo */
-            align-items: center; /* ESTO ES LA CLAVE: Los centra verticalmente */
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-            gap: 40px; /* Espacio entre los dos bloques */
-        }
-        
-        /* Bloque Izquierdo (Nombre y Botones) */
-        .cv-title {
-            flex: 1; /* Ocupa el espacio disponible */
-        }
-        
-        .cv-title h1 {
-            font-family: 'Montserrat', sans-serif; font-size: 2.2rem; color: var(--dark-text);
-            text-transform: uppercase; letter-spacing: -1px; margin-bottom: 5px; line-height: 1.1;
-        }
-        
-        .cv-title h2 {
-            font-size: 0.9rem; color: var(--primary); font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1px; margin-top: 10px; margin-bottom: 20px;
-        }
-        
-        /* Contenedor de Botones */
-        .cv-buttons {
-            display: flex; gap: 15px; flex-wrap: wrap;
-        }
-        
-        /* Bloque Derecho (Contacto) */
-        .cv-contact-info {
-            text-align: right; font-size: 0.9rem; color: var(--light-text);
-            min-width: 250px; /* Asegura que no se aplaste */
-        }
-        .cv-contact-info div { margin-bottom: 8px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-        .cv-contact-info a { color: var(--light-text); text-decoration: none; transition: 0.3s; }
-        .cv-contact-info a:hover { color: var(--primary); }
-        .cv-contact-info i { color: var(--primary); font-size: 1rem; width: 20px; text-align: center; }
-        
-        /* Estilos de Botones */
-        .download-btn {
-            display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px;
-            background: var(--dark-text); color: white; text-decoration: none; border-radius: 5px;
-            font-size: 0.85rem; font-weight: 600; transition: 0.3s;
-        }
-        .download-btn:hover { background: var(--primary); transform: translateY(-2px); }
-        .download-btn.secondary { background: #555; }
-        .download-btn.secondary:hover { background: var(--accent); color: black; }
-        
-        /* Resto de secciones */
-        .cv-section { margin-bottom: 40px; }
-        .section-title {
-            font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--dark-text);
-            border-left: 4px solid var(--primary); padding-left: 15px; margin-bottom: 25px;
-            text-transform: uppercase; font-weight: 700;
-        }
-        .job-desc { font-size: 0.95rem; color: #555; line-height: 1.6; text-align: justify; }
-        
-        .experience-item { margin-bottom: 25px; position: relative; padding-left: 20px; }
-        .experience-item::before {
-            content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px;
-            background: var(--light-text); border-radius: 50%;
-        }
-        .job-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .job-title { font-weight: 700; color: var(--dark-text); font-size: 1.05rem; }
-        .job-date {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--primary);
-            background: #f0f7ff; padding: 2px 8px; border-radius: 4px;
-        }
-        .job-company { font-weight: 600; color: var(--light-text); font-size: 0.95rem; margin-bottom: 8px; display: block; }
-        .bullet-list { list-style: none; padding-left: 0; margin-top: 10px; }
-        .bullet-list li { position: relative; padding-left: 15px; margin-bottom: 5px; font-size: 0.9rem; color: #555; }
-        .bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
-        
-        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .skill-category { margin-bottom: 15px; }
-        .skill-category h4 { font-size: 0.95rem; margin-bottom: 8px; color: var(--dark-text); text-transform: uppercase; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-tag { background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; color: #495057; font-weight: 500; }
-        .languages-list { display: flex; gap: 40px; }
-        .lang-item strong { display: block; color: var(--dark-text); }
-        .lang-item span { color: var(--light-text); font-size: 0.9rem; }
-        
-        /* Responsive Móvil */
-        @media (max-width: 850px) {
-            .cv-header { flex-direction: column; align-items: flex-start; gap: 30px; }
-            .cv-contact-info { text-align: left; width: 100%; }
-            .cv-contact-info div { justify-content: flex-start; }
-            .cv-buttons { flex-direction: column; width: 100%; }
-            .download-btn { justify-content: center; width: 100%; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .languages-list { flex-direction: column; gap: 15px; }
-        }
+:root {
+    --primary: #007bff;
+    --dark-text: #2c3e50;
+    --light-text: #636e72;
+    --paper-bg: #ffffff;
+    --accent: #00d4ff;
+    --bg-dark: #0a0a0b;
+}
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--dark-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Fondo Animado */
+.bg-gradient {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+    background: linear-gradient(45deg, #0a0a0b, #121225, #1a1a3a, #0f2045);
+    background-size: 400% 400%; animation: gradientMove 15s ease infinite;
+}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+}
+
+/* Botón Volver */
+.back-btn-glass {
+    position: fixed; top: 30px; left: 30px; width: 45px; height: 45px;
+    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; text-decoration: none; transition: all 0.3s ease; z-index: 100;
+}
+.back-btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
+
+/* Contenedor Principal */
+.cv-wrapper {
+    display: flex; justify-content: center; padding: 40px 15px; min-height: 100vh;
+}
+
+/* Papel Flotante (MÁS COMPACTO) */
+.floating-paper {
+    background: var(--paper-bg); 
+    width: 100%; max-width: 850px; /* Reducido de 950px a 850px */
+    border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative; overflow: hidden; animation: floatPaper 6s ease-in-out infinite;
+}
+@keyframes floatPaper {
+    0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); }
+}
+
+.paper-header-strip { height: 8px; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 100%; }
+.cv-content { padding: 35px; /* Reducido de 50px a 35px */ }
+
+/* --- CABECERA CV COMPACTA --- */
+.cv-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; /* Alineado arriba para ahorrar espacio */
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px; /* Reducido */
+    margin-bottom: 30px; /* Reducido */
+    gap: 20px; 
+}
+
+/* Bloque Izquierdo */
+.cv-title { flex: 1; }
+
+.cv-title h1 {
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 1.8rem; /* Reducido de 2.2rem */
+    color: var(--dark-text);
+    text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 5px; line-height: 1.1;
+}
+
+.cv-title h2 {
+    font-size: 0.85rem; color: var(--primary); font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-top: 5px; margin-bottom: 15px;
+}
+
+/* Botones */
+.cv-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.download-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; /* Botones más pequeños */
+    background: var(--dark-text); color: white; text-decoration: none; border-radius: 5px;
+    font-size: 0.8rem; font-weight: 600; transition: 0.3s;
+}
+.download-btn:hover { background: var(--primary); transform: translateY(-2px); }
+.download-btn.secondary { background: #555; }
+.download-btn.secondary:hover { background: var(--accent); color: black; }
+
+/* Bloque Derecho (Contacto) */
+.cv-contact-info {
+    text-align: right; font-size: 0.85rem; color: var(--light-text);
+    min-width: 200px; padding-top: 5px; /* Ajuste visual */
+}
+.cv-contact-info div { margin-bottom: 6px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.cv-contact-info a { color: var(--light-text); text-decoration: none; transition: 0.3s; }
+.cv-contact-info a:hover { color: var(--primary); }
+.cv-contact-info i { color: var(--primary); font-size: 0.9rem; width: 18px; text-align: center; }
+
+/* Secciones */
+.cv-section { margin-bottom: 30px; /* Reducido de 40px */ }
+.section-title {
+    font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--dark-text);
+    border-left: 4px solid var(--primary); padding-left: 12px; margin-bottom: 15px;
+    text-transform: uppercase; font-weight: 700;
+}
+.job-desc { font-size: 0.9rem; color: #555; line-height: 1.5; text-align: justify; }
+
+.experience-item { margin-bottom: 20px; position: relative; padding-left: 18px; }
+.experience-item::before {
+    content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+    background: var(--light-text); border-radius: 50%;
+}
+
+.job-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.job-title { font-weight: 700; color: var(--dark-text); font-size: 1rem; }
+.job-date {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--primary);
+    background: #f0f7ff; padding: 2px 6px; border-radius: 4px;
+}
+.job-company { font-weight: 600; color: var(--light-text); font-size: 0.9rem; margin-bottom: 6px; display: block; }
+
+.bullet-list { list-style: none; padding-left: 0; margin-top: 8px; }
+.bullet-list li { position: relative; padding-left: 15px; margin-bottom: 4px; font-size: 0.85rem; color: #555; }
+.bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+
+/* Grids */
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.skill-category { margin-bottom: 10px; }
+.skill-category h4 { font-size: 0.9rem; margin-bottom: 6px; color: var(--dark-text); text-transform: uppercase; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag { background: #f1f3f5; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; color: #495057; font-weight: 500; }
+
+.languages-list { display: flex; gap: 30px; }
+.lang-item strong { display: block; color: var(--dark-text); font-size: 0.9rem; }
+.lang-item span { color: var(--light-text); font-size: 0.85rem; }
+
+/* Responsive Móvil */
+@media (max-width: 800px) {
+    .cv-header { flex-direction: column; gap: 20px; }
+    .cv-contact-info { text-align: left; width: 100%; }
+    .cv-contact-info div { justify-content: flex-start; }
+    .cv-buttons { flex-direction: column; width: 100%; }
+    .download-btn { justify-content: center; width: 100%; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .cv-content { padding: 25px; }
+    .languages-list { flex-direction: column; gap: 10px; }
+}
 
 
     </style>
