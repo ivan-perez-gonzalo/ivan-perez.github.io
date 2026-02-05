@@ -185,6 +185,28 @@
             .cv-title h1 { font-size: 1.8rem; }
             .languages-list { flex-direction: column; gap: 15px; }
         }
+        /* --- NUEVO: ESTILOS PARA LOS DOS BOTONES --- */
+        .cv-buttons {
+            display: flex;
+            gap: 15px; /* Separación entre botones */
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* Estilo para el botón gris (Inglés) */
+        .download-btn.secondary {
+            background: #444; 
+        }
+        .download-btn.secondary:hover {
+            background: var(--accent);
+            color: #000; /* Texto negro al pasar el ratón para contraste */
+        }
+        
+        /* Ajuste para móvil */
+        @media (max-width: 768px) {
+            .cv-buttons { flex-direction: column; }
+            .download-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -206,10 +228,17 @@
                         <h1>Iván Pérez Gonzalo</h1>
                         <h2>Ingeniero de Sistemas Aeroespaciales y de Telecomunicación</h2>
                         
-                        <a href="Iván_Pérez_Gonzalo_cv.pdf" target="_blank" class="download-btn">
-                            <i class="fas fa-file-pdf"></i> Ver PDF Original
-                        </a>
-                    </div>
+                        <div class="cv-buttons">
+    
+                            <a href="Iván_Pérez_Gonzalo_cv.pdf" target="_blank" class="download-btn">
+                                <i class="fas fa-file-pdf"></i> Ver PDF Original
+                            </a>
+                        
+                            <a href="Iván_Pérez_Gonzalo_cv_english.pdf" target="_blank" class="download-btn secondary">
+                                <i class="fas fa-globe"></i> English CV
+                            </a>
+                        
+                        </div>
                     
                     <div class="cv-contact-info">
                         <div><a href="mailto:ivan.perez.9.g@gmail.com">ivan.perez.9.g@gmail.com</a> <i class="fas fa-envelope"></i></div>
