@@ -133,10 +133,11 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
+        /* AQUI ESTÁ LA CLAVE PARA QUE EL VIDEO SE VEA BIEN */
         .card-image img,
         .card-image video {
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Rellena el espacio sin deformarse */
             transition: transform 0.5s ease;
         }
 
@@ -243,11 +244,15 @@
 
         <div class="projects-grid">
 
-            <div class="card-image">
-                <video loop muted playsinline poster="fotostatictr.jpeg" class="hover-video">
-                    <source src="Videotr.mp4" type="video/mp4">
-                </video>
-            </div>
+            <article class="project-card tilt-card"> <div class="glare"></div>
+                
+                <div class="card-image">
+                    <video loop muted playsinline poster="fotostatictr.jpeg" class="hover-video">
+                        <source src="Videotr.mp4" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                </div>
+
                 <div class="card-content">
                     <span class="card-category">Aeroespacial</span>
                     <h3>Tracker Satelital ISS</h3>
@@ -340,6 +345,29 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Este script busca todos los videos con la clase .hover-video
+        // y hace que se reproduzcan solo cuando el mouse está sobre la tarjeta.
+        document.addEventListener('DOMContentLoaded', () => {
+            const videos = document.querySelectorAll('.hover-video');
+
+            videos.forEach(video => {
+                // Buscamos la tarjeta padre más cercana
+                const card = video.closest('.project-card');
+
+                if(card) {
+                    card.addEventListener('mouseenter', () => {
+                        video.play();
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 0; // Opcional: Reinicia el video al salir
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
