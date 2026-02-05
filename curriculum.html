@@ -90,22 +90,78 @@
 
         .cv-content { padding: 50px; }
 
-        /* Cabecera CV */
+/* --- CABECERA CV CORREGIDA --- */
         .cv-header {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            border-bottom: 2px solid #f0f0f0; padding-bottom: 30px; margin-bottom: 40px;
+            display: flex; 
+            justify-content: space-between; /* Separa izquierda y derecha */
+            align-items: flex-start; /* Alinea arriba */
+            border-bottom: 2px solid #f0f0f0; 
+            padding-bottom: 30px; 
+            margin-bottom: 40px;
+            flex-wrap: nowrap; /* IMPORTANTE: Prohibido bajar de línea en PC */
+            gap: 20px; /* Espacio mínimo entre nombre y contacto */
+        }
+
+        .cv-title {
+            /* IMPORTANTE: Le damos un ancho máximo para que no se coma al contacto */
+            flex: 1; /* Ocupa el espacio disponible */
+            max-width: 65%; /* Deja el 35% restante para los datos de contacto */
         }
 
         .cv-title h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.2rem; color: var(--dark-text);
             text-transform: uppercase; letter-spacing: -1px; margin-bottom: 5px;
+            line-height: 1.1; /* Para que si el nombre es largo no ocupe tanto alto */
         }
 
         .cv-title h2 {
             font-size: 0.9rem; color: var(--primary);
             font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-            max-width: 400px; line-height: 1.4;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        /* Sección de la derecha (Contacto) */
+        .cv-contact-info { 
+            text-align: right; 
+            font-size: 0.9rem; 
+            color: var(--light-text);
+            flex-shrink: 0; /* IMPORTANTE: Impide que esta sección se aplaste */
+            width: auto;
+        }
+
+        .cv-contact-info div { 
+            margin-bottom: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end; /* Alinea iconos y texto a la derecha */
+            gap: 10px; /* Espacio entre texto e icono */
+        }
+
+        .cv-contact-info a { color: var(--light-text); text-decoration: none; transition: 0.3s; }
+        .cv-contact-info a:hover { color: var(--primary); }
+        
+        .cv-contact-info i { 
+            color: var(--primary); 
+            width: 20px; 
+            text-align: center; 
+            font-size: 1rem;
+        }
+
+        /* RESPONSIVE: En móvil sí dejamos que baje */
+        @media (max-width: 768px) {
+            .cv-header { 
+                flex-direction: column; /* Uno debajo de otro */
+                gap: 30px;
+            }
+            .cv-title { max-width: 100%; }
+            .cv-contact-info { 
+                text-align: left; 
+                width: 100%;
+            }
+            .cv-contact-info div { justify-content: flex-start; } /* Alinea a la izq en móvil */
+        }
         }
 
         .cv-contact-info { text-align: right; font-size: 0.9rem; color: var(--light-text); }
