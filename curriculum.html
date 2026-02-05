@@ -90,95 +90,65 @@
 
         .cv-content { padding: 50px; }
 
-/* --- CABECERA CV CORREGIDA --- */
+        /* --- CABECERA CV (ARREGLADA CON GRID) --- */
         .cv-header {
-            display: flex; 
-            justify-content: space-between; /* Separa izquierda y derecha */
-            align-items: flex-start; /* Alinea arriba */
+            display: grid; /* Usamos Grid en vez de Flex para mayor seguridad */
+            grid-template-columns: 1fr auto; /* Columna izq (flexible) | Columna der (ajustada) */
+            gap: 30px;
+            align-items: start;
             border-bottom: 2px solid #f0f0f0; 
             padding-bottom: 30px; 
             margin-bottom: 40px;
-            flex-wrap: nowrap; /* IMPORTANTE: Prohibido bajar de línea en PC */
-            gap: 20px; /* Espacio mínimo entre nombre y contacto */
-        }
-
-        .cv-title {
-            /* IMPORTANTE: Le damos un ancho máximo para que no se coma al contacto */
-            flex: 1; /* Ocupa el espacio disponible */
-            max-width: 65%; /* Deja el 35% restante para los datos de contacto */
         }
 
         .cv-title h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.2rem; color: var(--dark-text);
             text-transform: uppercase; letter-spacing: -1px; margin-bottom: 5px;
-            line-height: 1.1; /* Para que si el nombre es largo no ocupe tanto alto */
+            line-height: 1.1;
         }
 
         .cv-title h2 {
             font-size: 0.9rem; color: var(--primary);
             font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            max-width: 450px; line-height: 1.4;
             margin-top: 10px;
-            line-height: 1.4;
         }
 
-        /* Sección de la derecha (Contacto) */
+        /* --- BOTONES (NUEVO) --- */
+        .cv-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Sección de Contacto (Derecha) */
         .cv-contact-info { 
             text-align: right; 
             font-size: 0.9rem; 
             color: var(--light-text);
-            flex-shrink: 0; /* IMPORTANTE: Impide que esta sección se aplaste */
-            width: auto;
+            white-space: nowrap; /* Evita que los emails se rompan feo */
         }
-
-        .cv-contact-info div { 
-            margin-bottom: 8px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end; /* Alinea iconos y texto a la derecha */
-            gap: 10px; /* Espacio entre texto e icono */
-        }
-
+        .cv-contact-info div { margin-bottom: 8px; }
         .cv-contact-info a { color: var(--light-text); text-decoration: none; transition: 0.3s; }
         .cv-contact-info a:hover { color: var(--primary); }
-        
-        .cv-contact-info i { 
-            color: var(--primary); 
-            width: 20px; 
-            text-align: center; 
-            font-size: 1rem;
-        }
+        .cv-contact-info i { color: var(--primary); width: 20px; text-align: center; margin-left: 5px; }
 
-        /* RESPONSIVE: En móvil sí dejamos que baje */
-        @media (max-width: 768px) {
-            .cv-header { 
-                flex-direction: column; /* Uno debajo de otro */
-                gap: 30px;
-            }
-            .cv-title { max-width: 100%; }
-            .cv-contact-info { 
-                text-align: left; 
-                width: 100%;
-            }
-            .cv-contact-info div { justify-content: flex-start; } /* Alinea a la izq en móvil */
-        }
-        }
-
-        .cv-contact-info { text-align: right; font-size: 0.9rem; color: var(--light-text); }
-        .cv-contact-info div { margin-bottom: 5px; }
-        .cv-contact-info a { color: var(--light-text); text-decoration: none; transition: 0.3s; }
-        .cv-contact-info a:hover { color: var(--primary); }
-        .cv-contact-info i { color: var(--primary); width: 20px; text-align: center; }
-
-        /* Botón Descarga */
+        /* Estilos de Botones */
         .download-btn {
             display: inline-flex; align-items: center; gap: 10px;
-            margin-top: 15px; padding: 8px 16px;
+            padding: 10px 18px;
             background: var(--dark-text); color: white;
             text-decoration: none; border-radius: 5px;
             font-size: 0.85rem; font-weight: 600; transition: 0.3s;
         }
         .download-btn:hover { background: var(--primary); transform: translateY(-2px); }
+        
+        /* Botón Inglés */
+        .download-btn.secondary { background: #444; }
+        .download-btn.secondary:hover { background: var(--accent); color: black; }
+
 
         /* Secciones */
         .cv-section { margin-bottom: 40px; }
@@ -191,7 +161,7 @@
 
         .job-desc { font-size: 0.95rem; color: #555; line-height: 1.6; text-align: justify; }
 
-        /* Items de Lista (Educación/Proyectos) */
+        /* Items de Lista */
         .experience-item { margin-bottom: 25px; position: relative; padding-left: 20px; }
         .experience-item::before {
             content: ''; position: absolute; left: 0; top: 8px;
@@ -206,41 +176,40 @@
         }
         .job-company { font-weight: 600; color: var(--light-text); font-size: 0.95rem; margin-bottom: 8px; display: block; }
 
-        /* Listas con viñetas */
         .bullet-list { list-style: none; padding-left: 0; margin-top: 10px; }
-        .bullet-list li {
-            position: relative; padding-left: 15px; margin-bottom: 5px;
-            font-size: 0.9rem; color: #555;
-        }
-        .bullet-list li::before {
-            content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold;
-        }
+        .bullet-list li { position: relative; padding-left: 15px; margin-bottom: 5px; font-size: 0.9rem; color: #555; }
+        .bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
 
-        /* Grid de Habilidades */
+        /* Grids y Tablas */
         .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        
         .skill-category { margin-bottom: 15px; }
         .skill-category h4 { font-size: 0.95rem; margin-bottom: 8px; color: var(--dark-text); text-transform: uppercase; }
         .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-tag {
-            background: #f1f3f5; padding: 4px 10px; border-radius: 4px;
-            font-size: 0.85rem; color: #495057; font-weight: 500;
-        }
+        .skill-tag { background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; color: #495057; font-weight: 500; }
 
-        /* Idiomas */
         .languages-list { display: flex; gap: 40px; }
         .lang-item strong { display: block; color: var(--dark-text); }
         .lang-item span { color: var(--light-text); font-size: 0.9rem; }
 
-        /* Responsive */
+        /* --- RESPONSIVE MÓVIL --- */
         @media (max-width: 768px) {
-            .cv-header { flex-direction: column; gap: 20px; }
-            .cv-contact-info { text-align: left; }
+            .cv-header { 
+                grid-template-columns: 1fr; /* Una sola columna */
+                gap: 20px; 
+            }
+            .cv-contact-info { 
+                text-align: left; 
+                white-space: normal;
+            }
+            .cv-contact-info i { margin-left: 0; margin-right: 10px; display: inline-block; width: 20px; text-align: center; }
             .skills-grid { grid-template-columns: 1fr; }
             .cv-content { padding: 25px; }
             .cv-title h1 { font-size: 1.8rem; }
             .languages-list { flex-direction: column; gap: 15px; }
+            .cv-buttons { flex-direction: column; }
+            .download-btn { width: 100%; justify-content: center; }
         }
+
 
     </style>
 </head>
