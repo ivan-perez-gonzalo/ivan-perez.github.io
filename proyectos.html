@@ -133,13 +133,15 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .card-image img {
+        .card-image img,
+        .card-image video {
             width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .project-card:hover .card-image img {
+        .project-card:hover .card-image img,
+        .project-card:hover .card-image video {
             transform: scale(1.1);
         }
 
@@ -241,9 +243,11 @@
 
         <div class="projects-grid">
 
-            <article class="project-card tilt-card"> <div class="glare"></div> <div class="card-image">
-                    <img src="https://via.placeholder.com/600x400?text=Proyecto+Satelite" alt="Tracker Satelital">
-                </div>
+            <div class="card-image">
+                <video loop muted playsinline poster="fotostatictr.jpeg" class="hover-video">
+                    <source src="Videotr.mp4" type="video/mp4">
+                </video>
+            </div>
                 <div class="card-content">
                     <span class="card-category">Aeroespacial</span>
                     <h3>Tracker Satelital ISS</h3>
