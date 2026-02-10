@@ -5,298 +5,336 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iván Pérez | Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- ESTILO EDITORIAL TECH --- */
+        /* --- VARIABLES DEL SISTEMA --- */
         :root {
-            --bg-color: #050505;
-            --text-color: #ededed;
-            --text-muted: #666666;
-            --accent: #2563eb; /* Azul Royal Eléctrico */
-            --line-color: rgba(255,255,255,0.1);
+            --bg-deep: #030712; /* Negro azulado profundo */
+            --glass-surface: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            
+            /* Gradiente "Cyber-Clean" */
+            --gradient-primary: linear-gradient(135deg, #00f2ff 0%, #0078ff 100%);
+            --accent-cyan: #00f2ff;
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Manrope', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.7;
         }
 
-        /* Ruido de fondo sutil para textura */
-        .noise-overlay {
+        /* --- FONDO CON ORBES DE LUZ --- */
+        .ambient-glow {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');
-            pointer-events: none;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0, 120, 255, 0.15), transparent 70%);
+            top: -200px; left: -100px;
+            filter: blur(80px);
             z-index: -1;
-            opacity: 0.4;
-        }
-
-        /* --- HEADER MINIMALISTA --- */
-        nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            mix-blend-mode: difference; /* Hace que el texto se vea sobre cualquier fondo */
+            animation: pulseGlow 10s infinite alternate;
         }
         
-        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -1px; font-size: 1.2rem; }
-        .back-link { text-decoration: none; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-
-        /* --- CONTENEDOR CENTRAL --- */
-        .wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 150px 20px 100px;
+        .ambient-glow-2 {
+            position: fixed;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.1), transparent 70%);
+            bottom: -100px; right: -100px;
+            filter: blur(80px);
+            z-index: -1;
         }
 
-        /* --- TIPOGRAFÍA GIGANTE --- */
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- HEADER FLOTANTE --- */
+        nav {
+            position: fixed;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1000px;
+            padding: 15px 30px;
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -1px; font-size: 1.1rem; }
+        .logo span { color: var(--accent-cyan); }
+        
+        .nav-back { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: 0.3s; }
+        .nav-back:hover { color: white; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 180px 20px 100px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 50px;
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 6vw; /* Tamaño reactivo a la pantalla */
-            line-height: 0.9;
-            margin-bottom: 50px;
-            font-weight: 800;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
             letter-spacing: -2px;
-            background: linear-gradient(to right, #fff, #888);
+            background: linear-gradient(180deg, #fff 0%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .intro-lead {
-            font-size: 1.5rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-            max-width: 80%;
-            margin-bottom: 100px;
-            border-left: 2px solid var(--accent);
-            padding-left: 30px;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* --- SECCIONES EDITORIALES --- */
-        .editorial-section {
-            margin-bottom: 150px;
-            position: relative;
+        /* --- GRID DE TARJETAS (Bento Moderno) --- */
+        .grid-wrapper {
+            max-width: 1100px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: 24px;
         }
 
-        .section-header {
-            display: flex;
-            align-items: baseline;
-            gap: 20px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--line-color);
-            padding-bottom: 20px;
-        }
-
-        .section-number {
-            font-family: 'Syne', sans-serif;
-            font-size: 1rem;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .text-body {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #ccc;
-            margin-bottom: 40px;
-            max-width: 90%;
-        }
-
-        strong { color: white; font-weight: 600; }
-
-        /* --- IMÁGENES ARTÍSTICAS --- */
-        .image-reveal {
-            width: 100%;
-            height: 500px; /* Altura fija para impacto */
-            background-color: #111;
+        /* Estilo base de Tarjeta de Cristal */
+        .glass-card {
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
-            margin: 40px 0 80px;
-            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .image-reveal img {
+        .glass-card:hover {
+            border-color: var(--glass-highlight);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Títulos dentro de tarjetas */
+        .glass-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .glass-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .highlight { color: var(--accent-cyan); font-weight: 600; }
+
+        /* Iconos de fondo decorativos */
+        .bg-icon {
+            position: absolute;
+            bottom: -20px; right: -20px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(-15deg);
+            pointer-events: none;
+            transition: 0.4s;
+        }
+        .glass-card:hover .bg-icon {
+            color: rgba(255, 255, 255, 0.05);
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* --- CONFIGURACIÓN DE CELDAS --- */
+        
+        /* 1. Visión: Texto (Ancho medio) */
+        .card-vision { grid-column: span 7; }
+
+        /* 2. Visión: Imagen (Ancho pequeño) */
+        .card-vision-img { 
+            grid-column: span 5; 
+            padding: 0; 
+            position: relative;
+        }
+
+        /* 3. Origen: Vertical (Alto) */
+        .card-origin { 
+            grid-column: span 5; 
+            grid-row: span 2; 
+        }
+
+        /* 4. Desafío: Texto (Ancho medio) */
+        .card-challenge { grid-column: span 7; }
+
+        /* 5. Tech Stack: (Barra inferior) */
+        .card-tech { 
+            grid-column: span 7; 
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.05), rgba(0,0,0,0));
+            border-color: rgba(0, 242, 255, 0.2);
+        }
+
+        /* --- ESTILOS DE IMAGEN --- */
+        .img-cover {
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: grayscale(100%);
-            transition: 0.7s ease;
             opacity: 0.7;
+            transition: 0.5s;
         }
+        .glass-card:hover .img-cover { opacity: 1; transform: scale(1.05); }
 
-        .image-reveal:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.03);
-            opacity: 1;
-        }
-
-        /* Overlay de texto en imagen */
-        .img-caption {
+        .placeholder-box {
             position: absolute;
-            bottom: 20px; right: 20px;
-            background: black;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: #0f111a;
+            color: var(--text-secondary);
+        }
+        .placeholder-box i { font-size: 3rem; margin-bottom: 10px; color: var(--accent-cyan); }
+        .placeholder-box span { font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- TAGS TECNOLÓGICOS --- */
+        .tech-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+        .tech-tag {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            font-size: 0.85rem;
             color: white;
-            padding: 5px 15px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            border: 1px solid var(--line-color);
         }
 
-        /* --- TECH STACK LISTA --- */
-        .tech-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            border-top: 1px solid var(--line-color);
-            padding-top: 40px;
-        }
-
-        .tech-item {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            transition: 0.3s;
-            display: flex; align-items: center; gap: 10px;
-            cursor: crosshair;
-        }
-
-        .tech-item:hover { color: white; transform: translateX(10px); }
-        .tech-item i { font-size: 0.8rem; color: var(--accent); opacity: 0; transition: 0.3s; }
-        .tech-item:hover i { opacity: 1; }
-
-        /* --- FOOTER SIMPLE --- */
-        footer {
-            text-align: center;
-            padding: 50px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--line-color);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2rem; }
-            .image-reveal { height: 300px; }
-            .intro-lead { font-size: 1.2rem; max-width: 100%; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .grid-wrapper { grid-template-columns: 1fr; }
+            .card-vision, .card-vision-img, .card-origin, .card-challenge, .card-tech {
+                grid-column: span 1; grid-row: auto;
+            }
+            .card-vision-img { height: 250px; }
+            h1 { font-size: 3rem; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
 
     <nav>
-        <a href="index.html" class="back-link">← VOLVER</a>
-        <div class="nav-logo">IVÁN PÉREZ</div>
+        <div class="logo">IVÁN<span>.PÉREZ</span></div>
+        <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Volver</a>
     </nav>
 
-    <div class="wrapper">
-        
-        <header>
-            <h1>INGENIERÍA<br>AEROESPACIAL<br>& TELECO.</h1>
-            <div class="intro-lead">
+    <header class="hero">
+        <span class="badge">System Status: Online</span>
+        <h1>Ingeniería Aeroespacial & Telecomunicaciones</h1>
+        <p>Una visión integral para conectar el cielo con la tierra. Diseño, propulsión y comunicación en un solo perfil.</p>
+    </header>
+
+    <div class="grid-wrapper">
+
+        <div class="glass-card card-vision">
+            <i class="fas fa-satellite bg-icon"></i>
+            <div>
+                <h3>Visión Integral</h3>
                 <p>
-                    Navegación, comunicación y propulsión. Una visión integral para conectar el cielo con la tierra.
+                    <strong>Navegación, comunicación y propulsión.</strong> Me fascina tener la capacidad de entender cómo un código escrito en mi portátil puede viajar por el espacio para controlar una nave a miles de kilómetros.
+                </p>
+                <p>
+                    El futuro está en la integración de ambos mundos: conectar el hardware físico con la red digital.
                 </p>
             </div>
-        </header>
+        </div>
 
-        <section class="editorial-section">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <h2>La Visión</h2>
+        <div class="glass-card card-vision-img">
+            <div class="placeholder-box">
+                <i class="fas fa-globe-americas"></i>
+                <span>IMG_SPACE_NETWORK.jpg</span>
             </div>
-            
-            <div class="image-reveal">
-                <div class="img-caption">SYSTEM: ORBITAL_COMMS</div>
+            </div>
+
+        <div class="glass-card card-origin">
+            <i class="fas fa-bolt bg-icon"></i>
+            <div>
+                <h3>La Chispa</h3>
+                <p style="margin-top: 15px;">
+                    Mucho antes de las ecuaciones, mi curiosidad nació en la pantalla. Crecí fascinado por la mecánica de <em>Cars</em> y la ingeniería empírica de <em>Cómo entrenar a tu dragón</em>.
+                </p>
+                <p>
+                    Ver a Hipo diseñar una aleta para solucionar un problema físico encendió una bombilla: <strong>"Crear para avanzar"</strong>.
+                </p>
+            </div>
+            <div style="height: 200px; background: #000; border-radius: 12px; margin-top: 20px; position: relative; overflow: hidden;">
+                <div class="placeholder-box" style="background: rgba(255,255,255,0.05);">
+                    <i class="fas fa-dragon"></i>
+                    <span>IMG_ORIGIN.jpg</span>
                 </div>
+                 </div>
+        </div>
 
-            <div class="text-body">
-                <p>
-                    Me fascina tener la capacidad de entender cómo un código escrito en mi portátil puede viajar por el espacio para controlar una nave a miles de kilómetros.
-                </p>
-                <p>
-                    Estudio la doble vertiente de los sistemas aeroespaciales y las telecomunicaciones porque creo que el futuro está en la integración de ambos mundos. <strong>No es magia, es ingeniería de precisión.</strong>
-                </p>
-            </div>
-        </section>
+        <div class="glass-card card-challenge">
+            <i class="fas fa-layer-group bg-icon"></i>
+            <h3>El Doble Grado</h3>
+            <p>
+                Tenía claro que quería ser ingeniero, pero dudaba entre vehículos o IT. Al final, no renuncié a nada.
+            </p>
+            <p>
+                Aquí encontré el equilibrio: <span class="highlight">Aeroespacial</span> para diseñar máquinas que rompan barreras físicas, y <span class="highlight">Teleco</span> para crear las redes que eliminen las barreras digitales.
+            </p>
+        </div>
 
-        <section class="editorial-section">
-            <div class="section-header">
-                <span class="section-number">02</span>
-                <h2>El Origen</h2>
+        <div class="glass-card card-tech">
+            <h3><i class="fas fa-code"></i> Arsenal Tecnológico</h3>
+            <div class="tech-cloud">
+                <div class="tech-tag">Python</div>
+                <div class="tech-tag">C++</div>
+                <div class="tech-tag">Matlab</div>
+                <div class="tech-tag">SatComs</div>
+                <div class="tech-tag">SQL</div>
+                <div class="tech-tag">React</div>
+                <div class="tech-tag">Orbital Mechanics</div>
             </div>
-
-            <div class="text-body">
-                <p>
-                    Mucho antes de conocer las ecuaciones de Navier-Stokes, mi curiosidad nació en la pantalla. Crecí fascinado por la mecánica y los paisajes de <em>Cars</em>, viendo la carretera como una aventura.
-                </p>
-                <p>
-                    Pero el momento clave fue en <em>Cómo entrenar a tu dragón</em>. Ver a Hipo diseñar la aleta de la cola para solucionar un problema físico encendió una bombilla en mi cabeza. <strong>"Crear para avanzar"</strong> se convirtió en mi obsesión.
-                </p>
-            </div>
-
-            <div class="image-reveal">
-                <div class="img-caption">SOURCE: CREATIVE_SPARK</div>
-                </div>
-        </section>
-
-        <section class="editorial-section">
-            <div class="section-header">
-                <span class="section-number">03</span>
-                <h2>El Doble Grado</h2>
-            </div>
-            
-            <div class="text-body">
-                <p>
-                    Tenía claro que quería ser ingeniero, pero dudaba entre la rama de vehículos o la tecnología de la información. Al final, comprendí que no tenía por qué renunciar a nada.
-                </p>
-                <p>
-                    Aquí encontré mi equilibrio: <strong>Aeroespacial</strong> para diseñar máquinas que rompan las barreras físicas, y <strong>Teleco</strong> para crear las redes que eliminen las barreras digitales.
-                </p>
-            </div>
-        </section>
-
-        <section class="editorial-section">
-            <div class="section-header">
-                <span class="section-number">04</span>
-                <h2>Tecnología</h2>
-            </div>
-            
-            <div class="tech-list">
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> Python</div>
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> C++ / Systems</div>
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> Matlab</div>
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> SatComs</div>
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> SQL & Data</div>
-                <div class="tech-item"><i class="fas fa-arrow-right"></i> React</div>
-            </div>
-        </section>
+        </div>
 
     </div>
-
-    <footer>
-        <p>&copy; 2024 Iván Pérez. System Status: Online.</p>
-    </footer>
 
 </body>
 </html>
