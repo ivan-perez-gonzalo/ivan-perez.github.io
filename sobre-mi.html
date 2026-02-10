@@ -3,349 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iván Pérez | Portfolio</title>
+    <title>Iván Pérez | Engineering</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CONFIGURACIÓN AERO-GLASS --- */
+        /* --- ESTILO "OBSIDIAN" --- */
         :root {
-            --bg-dark: #09090b;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --primary-glow: #7b2cbf; /* Violeta Neon */
-            --secondary-glow: #4361ee; /* Azul Real */
-            --text-white: #ffffff;
-            --text-gray: #b0b0c0;
+            --bg-color: #000000;
+            --card-bg: #111111;
+            --card-hover: #161616;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-gradient: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            --border-subtle: rgba(255,255,255,0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
-            background: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #09090b 100%);
-            min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* Luces de fondo ambientales */
-        .ambient-orb {
+        /* Fondo Aurora Animado */
+        .aurora-bg {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(100px);
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15), transparent 50%);
             z-index: -1;
-            opacity: 0.4;
+            filter: blur(80px);
+            animation: moveAurora 20s infinite alternate;
         }
-        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary-glow); }
-        .orb-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--secondary-glow); }
+        @keyframes moveAurora {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, 50px); }
+        }
 
         /* --- NAVEGACIÓN --- */
-        .nav-bar {
+        .nav-wrapper {
             position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 20px; left: 0; width: 100%;
+            display: flex; justify-content: center;
             z-index: 100;
-            backdrop-filter: blur(5px);
+            pointer-events: none; /* Para poder clicar a través */
         }
 
-        .back-btn {
-            text-decoration: none;
-            color: var(--text-white);
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.9rem;
-            opacity: 0.8; transition: 0.3s;
-        }
-        .back-btn:hover { opacity: 1; text-shadow: 0 0 10px white; }
-
-        /* --- HERO HEADER --- */
-        .hero-section {
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-        }
-        
-        h1 {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 5rem;
-            font-weight: 700;
-            line-height: 0.9;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff, #a0a0a0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        .tagline {
-            display: inline-block;
-            border: 1px solid var(--glass-border);
-            padding: 10px 30px;
+        .nav-pill {
+            pointer-events: auto;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-subtle);
+            padding: 10px 25px;
             border-radius: 50px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            font-family: 'Rajdhani', sans-serif;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: var(--secondary-glow);
-            box-shadow: 0 0 20px rgba(67, 97, 238, 0.2);
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
         }
 
-        /* --- LAYOUT DE CONTENIDO --- */
-        .main-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 100px;
+        .nav-pill a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-pill a:hover { color: white; }
+        .nav-pill span { color: var(--border-subtle); } /* Separador */
+        
+        .active-link { color: white !important; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 80vh;
             display: flex;
             flex-direction: column;
-            gap: 120px; /* Separación amplia entre secciones */
-        }
-
-        .section-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            justify-content: center;
             align-items: center;
-        }
-        
-        .section-row.reverse { direction: rtl; } /* Truco para invertir orden visual */
-        .section-row.reverse .text-col { direction: ltr; } /* Restaurar dirección texto */
-
-        /* --- COLUMNA DE TEXTO --- */
-        .text-col { position: relative; }
-
-        .section-number {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 4rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.05);
-            position: absolute;
-            top: -40px; left: -20px;
-            z-index: -1;
+            text-align: center;
+            padding: 20px;
         }
 
-        h2 {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 25px;
-            line-height: 1.1;
-        }
-        
-        /* Subrayado degradado */
-        h2 span {
-            background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow));
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff, #666);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-gray);
             margin-bottom: 20px;
-            font-weight: 300;
         }
 
-        /* --- COLUMNA DE IMAGEN (VENTANAS) --- */
-        .image-col {
-            position: relative;
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
         }
 
-        .window-frame {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
+        /* --- GRID DE CONTENIDO (BENTO) --- */
+        .grid-container {
+            max-width: 1100px;
+            margin: 0 auto 100px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Estilo base de las tarjetas */
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
             overflow: hidden;
-            /* Efecto cristal doble */
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            transition: transform 0.5s ease;
+            position: relative;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .window-frame:hover {
-            transform: scale(1.02);
-            border-color: var(--secondary-glow);
-            box-shadow: 0 0 30px rgba(67, 97, 238, 0.3);
+        .bento-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-5px);
+            background: var(--card-hover);
         }
 
-        /* Placeholder Imagen */
-        .img-content {
+        /* Textos dentro de tarjetas */
+        .card-content { padding: 40px; z-index: 2; }
+        
+        .bento-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .highlight { color: white; font-weight: 600; }
+
+        /* Icono de esquina */
+        .card-icon {
+            position: absolute;
+            top: 30px; right: 30px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* Contenedores de imagen */
+        .img-area {
+            width: 100%;
+            height: 250px;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto; /* Empuja la imagen al fondo */
+            mask-image: linear-gradient(to bottom, transparent, black 20%); /* Desvanecimiento suave arriba */
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%);
+        }
+
+        .img-area img {
             width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.7;
             transition: 0.5s;
         }
-        .window-frame:hover .img-content { opacity: 1; }
-        
-        /* Texto dentro del placeholder si no hay foto */
-        .placeholder-text {
-            position: absolute;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            text-align: center;
-            color: rgba(255,255,255,0.3);
-        }
-        .placeholder-text i { font-size: 3rem; margin-bottom: 10px; display: block; }
-        .placeholder-text span { font-family: 'Rajdhani', sans-serif; letter-spacing: 2px; }
+        .bento-card:hover .img-area img { opacity: 1; transform: scale(1.05); }
 
-        /* --- TECH STACK GRID --- */
-        .tech-section {
-            text-align: center;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 60px;
-            backdrop-filter: blur(20px);
+        /* Placeholder */
+        .placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: #333; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
+            background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 10px, #151515 10px, #151515 20px);
         }
 
-        .tech-grid {
+        /* --- TAMAÑOS DE TARJETA --- */
+        .span-2 { grid-column: span 2; } /* Ancho completo */
+        .span-1 { grid-column: span 1; } /* Mitad */
+
+        /* Tech Stack especial */
+        .tech-row {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 10px;
+            margin-top: 20px;
         }
-
-        .tech-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--text-white);
+        .tech-chip {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #ccc;
+            border: 1px solid transparent;
             transition: 0.3s;
-            display: flex; align-items: center; gap: 10px;
         }
-
-        .tech-card i { color: var(--secondary-glow); }
-
-        .tech-card:hover {
-            background: rgba(67, 97, 238, 0.1);
-            border-color: var(--secondary-glow);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        .tech-chip:hover {
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .section-row, .section-row.reverse {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                direction: ltr; /* Resetear dirección en móvil */
-            }
-            .window-frame { height: 250px; }
+        @media (max-width: 800px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .span-2, .span-1 { grid-column: span 1; }
             h1 { font-size: 3.5rem; }
-            .section-number { display: none; }
+            .hero { height: 60vh; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-orb orb-1"></div>
-    <div class="ambient-orb orb-2"></div>
+    <div class="aurora-bg"></div>
 
-    <nav class="nav-bar">
-        <a href="index.html" class="back-btn">
-            <i class="fas fa-chevron-left"></i> Inicio
-        </a>
-        <div style="font-family: 'Rajdhani'; font-weight: 700; letter-spacing: 1px;">IVÁN.DEV</div>
-    </nav>
+    <div class="nav-wrapper">
+        <div class="nav-pill">
+            <a href="index.html"><i class="fas fa-arrow-left"></i></a>
+            <span>|</span>
+            <a href="#" class="active-link">Sobre Mí</a>
+            <a href="#">Proyectos</a>
+            <a href="mailto:tu@email.com">Contacto</a>
+        </div>
+    </div>
 
-    <header class="hero-section">
+    <header class="hero">
         <h1>Iván Pérez</h1>
-        <div class="tagline">Ingeniería Aeroespacial & Telecomunicaciones</div>
+        <p>Ingeniería Aeroespacial & Telecomunicaciones</p>
     </header>
 
-    <div class="main-wrapper">
+    <div class="grid-container">
 
-        <section class="section-row">
-            <div class="text-col">
-                <div class="section-number">01</div>
-                <h2>Visión <span>Integral</span></h2>
+        <div class="bento-card span-2">
+            <i class="fas fa-satellite card-icon"></i>
+            <div class="card-content">
+                <h2>Visión Integral</h2>
                 <p>
-                    <strong>Navegación, comunicación y propulsión.</strong> Me fascina tener la capacidad de entender cómo un código escrito en mi portátil puede viajar por el espacio para controlar una nave a miles de kilómetros.
+                    <span class="highlight">Navegación, comunicación y propulsión.</span> Me fascina entender cómo un código en mi portátil viaja por el espacio para controlar una nave a miles de kilómetros.
                 </p>
                 <p>
                     Estudio la doble vertiente de los sistemas aeroespaciales y las telecomunicaciones porque creo que el futuro está en la integración de ambos mundos: <strong>conectar el cielo con la tierra</strong>.
                 </p>
             </div>
-            <div class="image-col">
-                <div class="window-frame">
-                    <div class="placeholder-text">
-                        <i class="fas fa-satellite"></i>
-                        <span>INSERT_SATELLITE_IMG</span>
-                    </div>
-                    </div>
-            </div>
-        </section>
+            <div class="img-area" style="height: 300px;">
+                <div class="placeholder">IMG_SPACE_SATELLITE.jpg</div>
+                </div>
+        </div>
 
-        <section class="section-row reverse">
-            <div class="text-col">
-                <div class="section-number">02</div>
-                <h2>La Chispa <span>(El Origen)</span></h2>
+        <div class="bento-card span-1">
+            <i class="fas fa-film card-icon"></i>
+            <div class="card-content">
+                <h2>La Chispa</h2>
                 <p>
-                    Mucho antes de conocer las ecuaciones de Navier-Stokes, mi curiosidad nació en la pantalla. Crecí fascinado por la mecánica y los paisajes de <em>Cars</em>, viendo la carretera como una aventura.
+                    Mi curiosidad nació en la pantalla con <em>Cars</em> y <em>Cómo entrenar a tu dragón</em>. Ver a Hipo diseñar una aleta para solucionar un problema físico encendió la bombilla.
                 </p>
-                <p>
-                    Pero el momento clave fue en <em>Cómo entrenar a tu dragón</em>. Ver a Hipo diseñar la aleta de la cola para solucionar un problema físico encendió una bombilla en mi cabeza. <strong>Quería crear herramientas para superar lo imposible.</strong>
-                </p>
+                <p><span class="highlight">"Crear para avanzar"</span> es mi motor.</p>
             </div>
-            <div class="image-col">
-                <div class="window-frame">
-                    <div class="placeholder-text">
-                        <i class="fas fa-dragon"></i>
-                        <span>INSERT_ORIGIN_IMG</span>
-                    </div>
-                    </div>
-            </div>
-        </section>
+            <div class="img-area">
+                <div class="placeholder">IMG_ORIGIN_MOVIE.jpg</div>
+                </div>
+        </div>
 
-        <section class="section-row">
-            <div class="text-col">
-                <div class="section-number">03</div>
-                <h2>El Desafío <span>Académico</span></h2>
+        <div class="bento-card span-1">
+            <i class="fas fa-university card-icon"></i>
+            <div class="card-content">
+                <h2>El Doble Grado</h2>
                 <p>
-                    Tenía clarísimo que quería ser ingeniero, pero el "cuál" me costó más decidirlo. Pasé tiempo comparando vehículos vs. tecnología de la información.
+                    ¿Vehículos o IT? No quise renunciar a nada.
                 </p>
                 <p>
-                    Al final, me di cuenta de que no tenía por qué renunciar a nada. Aquí encontré mi equilibrio: <strong>Aeroespacial</strong> para las máquinas físicas y <strong>Teleco</strong> para las redes digitales.
+                    <strong>Aeroespacial:</strong> Romper barreras físicas.<br>
+                    <strong>Teleco:</strong> Eliminar barreras digitales.
                 </p>
             </div>
-            <div class="image-col">
-                <div class="window-frame">
-                    <div class="placeholder-text">
-                        <i class="fas fa-laptop-code"></i>
-                        <span>INSERT_STUDY_IMG</span>
-                    </div>
-                    </div>
-            </div>
-        </section>
+            <div class="img-area">
+                <div class="placeholder">IMG_UNIVERSITY_LAB.jpg</div>
+                </div>
+        </div>
 
-        <section class="tech-section">
-            <h2><i class="fas fa-rocket"></i> Arsenal Tecnológico</h2>
-            <div class="tech-grid">
-                <div class="tech-card"><i class="fab fa-python"></i> Python</div>
-                <div class="tech-card"><i class="fas fa-satellite-dish"></i> SatComs</div>
-                <div class="tech-card"><i class="fas fa-square-root-alt"></i> Matlab</div>
-                <div class="tech-card"><i class="fab fa-js"></i> JavaScript</div>
-                <div class="tech-card"><i class="fas fa-database"></i> SQL</div>
-                <div class="tech-card"><i class="fab fa-react"></i> React</div>
+        <div class="bento-card span-2">
+            <i class="fas fa-code card-icon"></i>
+            <div class="card-content">
+                <h2>Arsenal Tecnológico</h2>
+                <p>Herramientas y lenguajes para sistemas complejos.</p>
+                
+                <div class="tech-row">
+                    <div class="tech-chip">Python</div>
+                    <div class="tech-chip">C++</div>
+                    <div class="tech-chip">Matlab</div>
+                    <div class="tech-chip">SatComs</div>
+                    <div class="tech-chip">SQL</div>
+                    <div class="tech-chip">React</div>
+                    <div class="tech-chip">Orbital Mechanics</div>
+                    <div class="tech-chip">RF Systems</div>
+                </div>
             </div>
-        </section>
+        </div>
 
     </div>
 
