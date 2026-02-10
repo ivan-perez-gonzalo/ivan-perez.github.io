@@ -3,320 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí | Iván Pérez</title>
+    <title>Iván Pérez | Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES --- */
+        /* --- CONFIGURACIÓN TECH --- */
         :root {
-            --primary: #007bff;
-            --accent: #00d4ff; 
-            --glass: rgba(255, 255, 255, 0.05); 
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text: #ffffff;
-            --bg-dark: #0a0a0b;
+            --bg-deep: #050505;
+            --glass-panel: rgba(20, 20, 35, 0.6);
+            --border-tech: rgba(0, 212, 255, 0.3);
+            --accent-cyan: #00f2ff;
+            --accent-blue: #007bff;
+            --text-main: #e0e0e0;
+            --text-dim: #8a8a9b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--text);
-            background-color: var(--bg-dark);
-            min-height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* Fondo Animado */
-        .bg-gradient {
+        /* Fondo de malla cibernética sutil */
+        .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+        }
+        
+        /* Luz ambiental */
+        .ambient-light {
+            position: fixed;
+            top: -20%; left: -10%;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(0,123,255,0.15) 0%, transparent 70%);
+            filter: blur(80px);
             z-index: -1;
-            background: linear-gradient(45deg, #0a0a0b, #121225, #1a1a3a, #0f2045);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
+            animation: floatLight 10s infinite alternate;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes floatLight {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
-        h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
-
-        .main-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        /* Botón Volver */
-        .back-btn-glass {
+        /* --- BOTÓN VOLVER --- */
+        .nav-back {
             position: fixed;
             top: 30px; left: 30px;
-            width: 50px; height: 50px;
-            background: rgba(255, 255, 255, 0.05);
+            z-index: 100;
+            color: var(--accent-cyan);
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .nav-back:hover { opacity: 1; text-shadow: 0 0 10px var(--accent-cyan); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- HERO HEADER --- */
+        header.hero {
+            text-align: center;
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border-tech);
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        header.hero::after {
+            content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 3px; background: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- ESTRUCTURA ZIG-ZAG --- */
+        .story-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        .story-section.reverse { flex-direction: row-reverse; }
+
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        /* Textos */
+        .text-content { flex: 1; position: relative; }
+        
+        .section-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        strong { color: white; border-bottom: 1px solid var(--accent-blue); }
+
+        /* --- MARCOS DE IMAGEN TECH --- */
+        .image-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .tech-frame {
+            position: relative;
+            width: 100%;
+            height: 350px; /* Altura fija para uniformidad */
+            border: 1px solid var(--border-tech);
+            background: var(--glass-panel);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50%;
+            border-radius: 4px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        .back-btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
-
-        /* Dashboard de Cristal */
-        .glass-dashboard {
-            display: flex;
-            flex-direction: column; 
-            background: var(--glass);
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 950px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
-            margin-top: 60px; 
+            transition: 0.4s ease;
         }
 
-        /* Sidebar */
-        .dashboard-sidebar {
-            background: rgba(0, 0, 0, 0.3); 
-            padding: 40px 30px;
-            text-align: center;
-            border-bottom: 1px solid var(--glass-border);
+        .tech-frame:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
         }
 
-        .image-container-large {
-            position: relative;
-            width: 150px; height: 150px;
-            margin: 0 auto 25px;
+        /* Decoraciones de esquinas */
+        .tech-frame::before, .tech-frame::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border: 2px solid var(--accent-cyan);
+            transition: 0.3s;
         }
+        .tech-frame::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .tech-frame::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
-        .image-container-large img {
+        /* Placeholder de imagen (para cuando no hay foto) */
+        .img-placeholder {
             width: 100%; height: 100%;
-            border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            opacity: 0.6; /* Un poco oscurecida para que resalte el texto tech */
+            transition: 0.5s;
         }
+        
+        .tech-frame:hover .img-placeholder { opacity: 1; transform: scale(1.05); }
 
-        .status-indicator {
+        /* Overlay "Empty State" si no pones foto */
+        .empty-state {
             position: absolute;
-            bottom: 8px; right: 8px;
-            width: 22px; height: 22px;
-            background-color: #00ff88;
-            border-radius: 50%;
-            border: 3px solid var(--bg-dark);
+            text-align: center;
+            color: var(--border-tech);
         }
-        .pulsate { animation: pulse-green 2s infinite; }
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-            100% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
+        .empty-state i { font-size: 3rem; margin-bottom: 10px; }
+        .empty-state span { font-family: 'Fira Code', monospace; display: block; font-size: 0.8rem; }
+
+        /* --- GRID DE TECNOLOGÍAS --- */
+        .tech-stack-section {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-tech);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+            text-align: center;
         }
 
-        .dashboard-sidebar h2 { font-size: 1.8rem; margin-bottom: 5px; }
-        .role-tag {
-            color: var(--accent);
-            font-size: 0.9rem; font-weight: 700;
-            margin-bottom: 25px; letter-spacing: 1px;
-            text-transform: uppercase;
+        .tech-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
         }
 
-        .quick-stats {
-            display: flex; justify-content: center; gap: 30px;
-            margin-bottom: 30px; padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .stat { display: flex; flex-direction: column; }
-        .stat .num { font-size: 1.4rem; font-weight: 700; color: white; }
-        .stat .label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; }
-
-        .social-row { display: flex; justify-content: center; gap: 25px; }
-        .social-row a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: 0.3s; }
-        .social-row a:hover { color: var(--accent); transform: translateY(-3px); }
-
-        /* Contenido Derecho */
-        .dashboard-content { padding: 40px; }
-        .content-block { margin-bottom: 45px; }
-        .content-block:last-child { margin-bottom: 0; }
-        .content-block h3 {
-            font-size: 1.3rem; color: white; margin-bottom: 20px;
-            display: flex; align-items: center; gap: 12px;
-        }
-        .content-block h3 i { color: var(--accent); }
-        .content-block p {
-            color: rgba(255, 255, 255, 0.85); line-height: 1.7;
-            margin-bottom: 15px; font-size: 1rem;
+        .tech-pill {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            transition: 0.3s;
+            cursor: default;
         }
 
-        /* Timeline */
-        .glass-timeline {
-            border-left: 2px solid rgba(255, 255, 255, 0.1);
-            padding-left: 25px; margin-left: 10px;
-        }
-        .timeline-item { position: relative; margin-bottom: 30px; }
-        .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -31px; top: 5px;
-            width: 10px; height: 10px; background: var(--accent);
-            border-radius: 50%; box-shadow: 0 0 10px var(--accent);
-        }
-        .timeline-item .date {
-            font-size: 0.8rem; color: rgba(255,255,255,0.5);
-            text-transform: uppercase; letter-spacing: 1px;
-            display: block; margin-bottom: 5px;
-        }
-        .timeline-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
-        .timeline-item p { font-size: 0.95rem; margin: 0; }
-
-        /* Tech Badges */
-        .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-        .tech-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 18px; border-radius: 50px;
-            font-size: 0.9rem; font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 10px;
-        }
-        .tech-badge i { color: var(--accent); }
-        .tech-badge:hover {
-            background: rgba(255, 255, 255, 0.15); border-color: var(--accent);
-            transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+        .tech-pill:hover {
+            background: var(--accent-cyan);
+            color: black;
+            box-shadow: 0 0 15px var(--accent-cyan);
         }
 
-        /* PC View */
-        @media (min-width: 900px) {
-            .glass-dashboard { flex-direction: row; }
-            .dashboard-sidebar {
-                width: 35%; border-bottom: none;
-                border-right: 1px solid var(--glass-border);
-                display: flex; flex-direction: column; justify-content: center; padding: 50px;
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .story-section, .story-section.reverse {
+                flex-direction: column;
+                gap: 30px;
             }
-            .dashboard-content {
-                width: 65%; padding: 60px;
-                overflow-y: auto; max-height: 80vh;
-            }
+            .image-content { width: 100%; }
+            .tech-frame { height: 250px; }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <div class="cyber-grid"></div>
+    <div class="ambient-light"></div>
 
-    <a href="index.html" class="back-btn-glass">
-        <i class="fas fa-arrow-left"></i>
+    <a href="index.html" class="nav-back">
+        <i class="fas fa-chevron-left"></i> SYSTEM_EXIT
     </a>
 
-    <main class="main-wrapper">
-        <div class="glass-dashboard">
+    <div class="container">
+        
+        <header class="hero">
+            <h1>IVÁN PÉREZ</h1>
+            <div class="subtitle">INGENIERÍA AEROESPACIAL & TELECOMUNICACIONES</div>
+        </header>
+
+        <section class="story-section">
+            <div class="text-content">
+                <span class="section-label">01 // MISSION_STATEMENT</span>
+                <h2>Conectando Cielo y Tierra</h2>
+                <p>
+                    Navegación, comunicación y propulsión. Una visión integral de la ingeniería.
+                    Me fascina tener la capacidad de entender cómo un código escrito en mi portátil puede viajar por el espacio para controlar una nave a miles de kilómetros.
+                </p>
+                <p>
+                    Estudio la doble vertiente de los sistemas aeroespaciales y las telecomunicaciones porque creo que el futuro está en la integración de ambos mundos. <strong>No es solo volar, es comunicar.</strong>
+                </p>
+            </div>
+            <div class="image-content">
+                <div class="tech-frame">
+                    <div class="empty-state">
+                        <i class="fas fa-satellite"></i>
+                        <span>IMG_SAT_COMMS.jpg</span>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section class="story-section reverse">
+            <div class="text-content">
+                <span class="section-label">02 // THE_SPARK</span>
+                <h2>El Origen</h2>
+                <p>
+                    Mucho antes de conocer las ecuaciones de Navier-Stokes, mi curiosidad nació en la pantalla. Crecí fascinado por la mecánica y los paisajes de <em>Cars</em>, viendo la carretera como una aventura.
+                </p>
+                <p>
+                    Pero el momento clave fue en <em>Cómo entrenar a tu dragón</em>. Ver a Hipo diseñar la aleta de la cola para solucionar un problema físico (la incapacidad de volar) encendió una bombilla en mi cabeza.
+                </p>
+                <p>
+                    Quería ser quien diseñara esa aleta. Esa necesidad de <strong>"crear para avanzar"</strong> y superar lo imposible es lo que hoy me empuja.
+                </p>
+            </div>
+            <div class="image-content">
+                <div class="tech-frame">
+                    <div class="empty-state">
+                        <i class="fas fa-dragon"></i>
+                        <span>IMG_ORIGIN_BLUEPRINT.jpg</span>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section class="story-section">
+            <div class="text-content">
+                <span class="section-label">03 // SYSTEM_INTEGRATION</span>
+                <h2>El Desafío Académico</h2>
+                <p>
+                    Tenía clarísimo que quería ser ingeniero, pero el "cuál" me costó más decidirlo. Pasé tiempo comparando vehículos vs. tecnología de la información. Al final, me di cuenta de que no tenía por qué renunciar a nada.
+                </p>
+                <p>
+                    Aquí encontré el equilibrio: <strong>Aeroespacial</strong> para diseñar máquinas que rompan las barreras físicas, y <strong>Teleco</strong> para crear las redes que eliminen las barreras digitales.
+                </p>
+            </div>
+            <div class="image-content">
+                <div class="tech-frame">
+                    <div class="empty-state">
+                        <i class="fas fa-university"></i>
+                        <span>IMG_ACADEMIC_LAB.jpg</span>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section class="tech-stack-section">
+            <span class="section-label">04 // ARSENAL_TECNOLÓGICO</span>
+            <h3>Capacidades del Sistema</h3>
             
-            <aside class="dashboard-sidebar">
-                <div class="profile-highlight">
-                    <div class="image-container-large">
-                        <img src="perfil.jpg" alt="Iván Pérez">
-                        <div class="status-indicator pulsate"></div>
-                    </div>
-                    <h2>Iván Pérez</h2>
-                    <p class="role-tag">Ingeniería Aeroespacial & Teleco</p>
-                    
-                    <div class="quick-stats">
-                        <div class="stat">
-                            <span class="num">21</span>
-                            <span class="label">Edad</span>
-                        </div>
-                        <div class="stat">
-                            <span class="num">ES</span>
-                            <span class="label">Ubicación</span>
-                        </div>
-                    </div>
+            <div class="tech-grid">
+                <div class="tech-pill">PYTHON</div>
+                <div class="tech-pill">C++</div>
+                <div class="tech-pill">MATLAB</div>
+                <div class="tech-pill">SATCOMS</div>
+                <div class="tech-pill">REACT</div>
+                <div class="tech-pill">NAVIER-STOKES</div>
+            </div>
+        </section>
 
-                    <div class="social-row">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="mailto:tu@email.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </aside>
-
-            <section class="dashboard-content">
-                
-                <div class="content-block">
-                    <h3><i class="fas fa-satellite-dish"></i> Visión Integral</h3>
-                    <p>
-                        <strong>Navegación, comunicación y propulsión.</strong> Me fascina tener la capacidad de entender cómo un código escrito en mi portátil puede viajar por el espacio para controlar una nave a miles de kilómetros.
-                    </p>
-                    <p>
-                        Estudio la doble vertiente de los sistemas aeroespaciales y las telecomunicaciones porque creo que el futuro está en la integración de ambos mundos: <strong>conectar el cielo con la tierra</strong>.
-                    </p>
-                </div>
-
-                <div class="content-block">
-                    <h3><i class="fas fa-bolt"></i> La Chispa (El Origen)</h3>
-                    <p>
-                        Mucho antes de conocer las ecuaciones de Navier-Stokes, mi curiosidad nació en la pantalla. Crecí fascinado por la mecánica y los paisajes de <em>Cars</em>, viendo la carretera como una aventura.
-                    </p>
-                    <p>
-                        Pero el momento clave fue en <em>Cómo entrenar a tu dragón</em>: ver a Hipo diseñar la aleta de la cola para solucionar un problema físico (la incapacidad de volar) encendió una bombilla en mi cabeza.
-                    </p>
-                    <p>
-                        Descubrí que quería ser quien diseñara esa aleta. Esa necesidad de <strong>"crear para avanzar"</strong> y superar lo imposible es lo que hoy me empuja cada día.
-                    </p>
-                </div>
-
-                <div class="content-block">
-                    <h3><i class="fas fa-project-diagram"></i> El Desafío: El Doble Grado</h3>
-                    <p>
-                        Tenía claro que quería ser ingeniero, pero dudaba entre la rama de vehículos o la tecnología de la información. Al final, comprendí que no tenía por qué renunciar a nada.
-                    </p>
-                    <p>
-                        Aquí encontré mi equilibrio: <strong>Aeroespacial</strong> para diseñar máquinas que rompan las barreras físicas que nos separan, y <strong>Teleco</strong> para crear las redes que eliminen las barreras digitales.
-                    </p>
-                </div>
-
-                <div class="content-block">
-                    <h3><i class="fas fa-graduation-cap"></i> Trayectoria</h3>
-                    <div class="glass-timeline">
-                        <div class="timeline-item">
-                            <span class="date">Actualidad</span>
-                            <h4>Ingeniería Aeroespacial</h4>
-                            <p>Universidad Politécnica</p>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="date">En curso</span>
-                            <h4>Ingeniería de Telecomunicaciones</h4>
-                            <p>Especialización en Sistemas</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-block">
-                    <h3><i class="fas fa-code"></i> Arsenal Tecnológico</h3>
-                    <div class="tech-grid">
-                        <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
-                        <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-                        <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
-                        <span class="tech-badge"><i class="fas fa-satellite"></i> SatComs</span>
-                        <span class="tech-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
-                        <span class="tech-badge"><i class="fab fa-react"></i> React</span>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-    </main>
+    </div>
 
 </body>
 </html>
